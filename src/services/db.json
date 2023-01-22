@@ -1,0 +1,38 @@
+{
+    "products":[
+{
+    "id":1,
+    "name":"cover 405",
+    "image":"/images/products/cover 405.png",
+    "imgAlt":"cover 405",
+    "score":4.7,
+    "price":1200,
+    "discount":20
+},
+{
+    "id":2,
+    "name":"cover 206",
+    "image":"/images/products/cover 206.png",
+    "imgAlt":"cover 206",
+    "score":4.7,
+    "price":1400,
+    "discount":20
+},{
+    "id":1,
+    "name":"cover pride",
+    "image":"/images/products/cover pride.png",
+    "imgAlt":"cover pride",
+    "score":4.7,
+    "price":500,
+    "discount":20
+},{
+    "id":1,
+    "name":"cover tiba",
+    "image":"/images/products/cover tiba.png",
+    "imgAlt":"cover 405",
+    "score":4.7,
+    "price":800,
+    "discount":20
+}
+    ]
+}

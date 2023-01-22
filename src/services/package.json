@@ -1,0 +1,12 @@
+{
+  "name": "services",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "json-server": "json-server --watch db.json --port 4000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

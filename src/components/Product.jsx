@@ -1,4 +1,12 @@
-const Product = ({ id, image, imgAlt, productName, car }) => {
+const Product = ({
+  id,
+  image,
+  imgAlt,
+  productName,
+  score,
+  price,
+  discount,
+}) => {
   return (
     <div>
       <Link to={`/ProductDetail/${id}`}>
@@ -18,7 +26,7 @@ const Product = ({ id, image, imgAlt, productName, car }) => {
         </div>
         <div>
           <p>{price} $</p>
-          <p>{discount}</p>
+          <p>{discount} %</p>
         </div>
         <button className="px-2 py-4">Add to Basket</button>
       </div>
