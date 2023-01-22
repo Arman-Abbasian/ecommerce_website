@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Product = ({
   id,
   image,
@@ -8,7 +10,7 @@ const Product = ({
   discount,
 }) => {
   return (
-    <div>
+    <div key={id} className="bg-red-600">
       <Link to={`/ProductDetail/${id}`}>
         <div class="aspect-w-1 aspect-h-1">
           <img
@@ -24,7 +26,7 @@ const Product = ({
           <></>
           <p>{score}</p>
         </div>
-        <div>
+        <div className="flex items-center">
           <p>{price} $</p>
           <p>{discount} %</p>
         </div>

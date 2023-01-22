@@ -1,5 +1,58 @@
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
+import Product from "../components/Product";
+import http from "../services/httpService";
+
 const Products = () => {
-  return <div>products</div>;
+  const [products, setProducts] = useState({
+    data: null,
+    error: null,
+    loading: false,
+  });
+  useEffect(() => {
+    setProducts({
+      data: null,
+      error: null,
+      loading: true,
+    });
+    http
+      .get("/products")
+      .then((res) =>
+        setProducts({
+          data: res.data,
+          error: null,
+          loading: false,
+        })
+      )
+      .catch((err) => {
+        setProducts({
+          data: null,
+          error: err,
+          loading: false,
+        });
+        toast.error(err.message);
+      });
+  }, []);
+  if (products.loading) return <p>loading</p>;
+  if (products.data && products.data.length === 0)
+    return <p>no products yet</p>;
+  if (products.data && products.data.length > 0)
+    return products.data.map((item) => {
+      return (
+        <Product
+          key={item.id}
+          id={item.id}
+          image={item.image}
+          imgAlt={item.imgAlt}
+          productName={item.name}
+          score={item.score}
+          price={item.price}
+          discount={item.discount}
+        />
+      );
+    });
 };
 
 export default Products;
