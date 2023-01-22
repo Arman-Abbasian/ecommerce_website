@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { AiFillStar } from "react-icons/ai";
 
 const Product = ({
   id,
@@ -10,7 +11,7 @@ const Product = ({
   discount,
 }) => {
   return (
-    <div key={id} className="bg-red-600">
+    <div key={id} className="border border-red-600 w-64">
       <Link to={`/ProductDetail/${id}`}>
         <div class="aspect-w-1 aspect-h-1">
           <img
@@ -20,17 +21,17 @@ const Product = ({
           />
         </div>
       </Link>
-      <div>
+      <div className="p-4 flex flex-col gap-2">
         <h2>{productName}</h2>
-        <div>
-          <></>
+        <div className="flex items-center gap-1">
+          <AiFillStar className="fill-yellow-500 stroke-orange-300" />
           <p>{score}</p>
         </div>
-        <div className="flex items-center">
+        <div className="flex justify-between items-center">
           <p>{price} $</p>
-          <p>{discount} %</p>
+          <p className="bg-red-700 px-2 py-1 rounded-full">{discount} %</p>
         </div>
-        <button className="px-2 py-4">Add to Basket</button>
+        <button className="p-2 rounded bg-gray-600">Add to Basket</button>
       </div>
     </div>
   );

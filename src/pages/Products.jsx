@@ -38,21 +38,26 @@ const Products = () => {
   if (products.loading) return <p>loading</p>;
   if (products.data && products.data.length === 0)
     return <p>no products yet</p>;
-  if (products.data && products.data.length > 0)
-    return products.data.map((item) => {
-      return (
-        <Product
-          key={item.id}
-          id={item.id}
-          image={item.image}
-          imgAlt={item.imgAlt}
-          productName={item.name}
-          score={item.score}
-          price={item.price}
-          discount={item.discount}
-        />
-      );
-    });
+  if (products.data && products.data.length > 0) {
+    return (
+      <div className="grid gap-2">
+        {products.data.map((item) => {
+          return (
+            <Product
+              key={item.id}
+              id={item.id}
+              image={item.image}
+              imgAlt={item.imgAlt}
+              productName={item.name}
+              score={item.score}
+              price={item.price}
+              discount={item.discount}
+            />
+          );
+        })}
+      </div>
+    );
+  }
 };
 
 export default Products;
