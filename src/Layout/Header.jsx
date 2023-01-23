@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { BsBasket3 } from "react-icons/bs";
-import { useCard } from "../Providers/CardProvider";
+import { useCard, useCardActions } from "../Providers/CardProvider";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const { data } = useCard();
@@ -46,7 +46,7 @@ const Header = () => {
             >
               <BsBasket3 className="w-6 h-6" />
               <span className="absolute flex justify-center items-center -top-4 right-28 w-5 h-5 rounded-full bg-red-600">
-                {data.length}
+                {data ? data.length : 0}
               </span>
             </Link>
           </li>

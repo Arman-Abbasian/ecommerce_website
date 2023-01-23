@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
-import { useCard } from "../Providers/CardProvider";
-import { ListItem } from "@mui/material";
+import { useCard, useCardActions } from "../Providers/CardProvider";
+import { useEffect } from "react";
 
 const Product = ({
   id,
@@ -14,8 +14,13 @@ const Product = ({
   addToCart,
 }) => {
   const { data } = useCard();
+  console.log(data);
   function findId(item) {
-    return data.findIndex((element) => element.id === item);
+    if (data) {
+      return data.findIndex((element) => element.id === item);
+    } else {
+      return -1;
+    }
   }
 
   return (
@@ -47,7 +52,7 @@ const Product = ({
           } `}
           onClick={addToCart}
         >
-          {findId(id) >= 0 ? "Added in cart" : "Add to basket"}
+          {findId(id) >= 0 ? "Added in Basket" : "Add to basket"}
         </button>
       </div>
     </div>
