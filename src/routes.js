@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Products from "./pages/Products";
 import NotFound from "./pages/NotFound";
+import ProductDetail from "./pages/ProductDetail";
 
 
 const Routee = () => {
@@ -17,6 +18,7 @@ const Routee = () => {
             <Route path="/Login"  element={<Login />} />
             <Route path="/Signup"  element={<Signup />} />
             <Route path="/Products"  element={<Products />} />
+            <Route path="/ProductDetail/:id"  element={<ProductDetail />} />
             <Route path="/*" element={<NotFound />} />
         </Routes>
      );

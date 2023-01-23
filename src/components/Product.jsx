@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
+import { useCard } from "../Providers/CardProvider";
+import { ListItem } from "@mui/material";
 
 const Product = ({
   id,
@@ -11,6 +13,11 @@ const Product = ({
   discount,
   addToCart,
 }) => {
+  const { data } = useCard();
+  function findId(item) {
+    return data.findIndex((element) => element.id === item);
+  }
+
   return (
     <div key={id} className="border border-red-600 w-64">
       <Link to={`/ProductDetail/${id}`}>
@@ -32,8 +39,15 @@ const Product = ({
           <p>{price} $</p>
           <p className="bg-red-700 px-2 py-1 rounded-full">{discount} %</p>
         </div>
-        <button className="p-2 rounded bg-gray-600" onClick={addToCart}>
-          Add to Basket
+        <button
+          className={`p-2 rounded bg-gray-600 ${
+            findId(id) >= 0
+              ? "cursor-not-allowed bg-opacity-40"
+              : "cursor-pointer"
+          } `}
+          onClick={addToCart}
+        >
+          {findId(id) >= 0 ? "Added in cart" : "Add to basket"}
         </button>
       </div>
     </div>

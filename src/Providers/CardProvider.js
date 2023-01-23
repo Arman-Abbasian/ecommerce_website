@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 const CardContext=createContext();
 const CardContextDispatcher=createContext();
 const CardProvider = ({children}) => {
-    const [card,setCard]=useState({data:[],error:null,loading:true})
+    const [card,setCard]=useState({data:null,error:null,loading:false})
 ;    return ( 
         <CardContext.Provider value={card}>
             <CardContextDispatcher.Provider value={setCard}>
@@ -23,7 +23,7 @@ export const useCardActions=()=>{
 
     //get card
     const initialLoading=()=>{
-        setCard({data:[],error:null,loading:true});
+        setCard({data:null,error:null,loading:true});
         http.get(`/card`)
         .then(res=>{
             setCard({data:res.data,error:null,loading:false});
