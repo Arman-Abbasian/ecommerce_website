@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 const CardContext=createContext();
 const CardContextDispatcher=createContext();
 const CardProvider = ({children}) => {
-    const [card,setCard]=useState({card:[],error:null,loading:true})
+    const [card,setCard]=useState({data:[],error:null,loading:true})
 ;    return ( 
         <CardContext.Provider value={card}>
             <CardContextDispatcher.Provider value={setCard}>
@@ -23,14 +23,24 @@ export const useCardActions=()=>{
 
     //get card
     const initialLoading=()=>{
-        setCard({card:[],error:null,loading:true});
-        http.get(`/products`)
+        setCard({data:[],error:null,loading:true});
+        http.get(`/card`)
         .then(res=>{
-            setCard({card:res.data,error:null,loading:false});
+            setCard({data:res.data,error:null,loading:false});
         })
         .catch(err=>{
-            setCard({card:null,error:err,loading:false});
+            setCard({data:null,error:err,loading:false});
             toast.error(err.message)
         });
     };
+    //add card item
+    const addToCart=(item)=>{
+        http.post("/card",{...item,quantity:1})
+        .then(res=>{
+            initialLoading();
+            toast.success(`${item.name} added to card successfully`)
+        })
+        .catch(err=>toast.error(err.message))
+    };
+    return{initialLoading,addToCart}
 }

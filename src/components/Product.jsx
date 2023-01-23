@@ -9,6 +9,7 @@ const Product = ({
   score,
   price,
   discount,
+  addToCart,
 }) => {
   return (
     <div key={id} className="border border-red-600 w-64">
@@ -31,7 +32,9 @@ const Product = ({
           <p>{price} $</p>
           <p className="bg-red-700 px-2 py-1 rounded-full">{discount} %</p>
         </div>
-        <button className="p-2 rounded bg-gray-600">Add to Basket</button>
+        <button className="p-2 rounded bg-gray-600" onClick={addToCart}>
+          Add to Basket
+        </button>
       </div>
     </div>
   );

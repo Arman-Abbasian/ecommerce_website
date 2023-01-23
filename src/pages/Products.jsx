@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import Product from "../components/Product";
+import { useCardActions } from "../Providers/CardProvider";
 import http from "../services/httpService";
 
 const Products = () => {
@@ -11,6 +12,7 @@ const Products = () => {
     error: null,
     loading: false,
   });
+  const {addToCart,initialLoading}=useCardActions();
   useEffect(() => {
     setProducts({
       data: null,
@@ -35,6 +37,11 @@ const Products = () => {
         toast.error(err.message);
       });
   }, []);
+
+useEffect(()=>{
+  initialLoading();
+},[])
+
   if (products.loading) return <p>loading</p>;
   if (products.data && products.data.length === 0)
     return <p>no products yet</p>;
@@ -52,6 +59,7 @@ const Products = () => {
               score={item.score}
               price={item.price}
               discount={item.discount}
+              addToCart={()=>addToCart(item)}
             />
           );
         })}
