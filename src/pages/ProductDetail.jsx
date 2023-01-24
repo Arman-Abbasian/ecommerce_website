@@ -1,36 +1,38 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { useCard, useCardActions } from "../Providers/CardProvider";
 import http from "../services/httpService";
 
 const ProductDetail = () => {
   const card = useCard();
-  const { id } = useParams();
-  const { addToCart, initialLoading } = useCardActions();
+  const selectedItemId = useParams().id;
+  const { addToCart } = useCardActions();
   const [selectedItem, setSelectedItem] = useState({
     data: null,
     error: null,
     loading: false,
   });
-  console.log(id);
   useEffect(() => {
+    setSelectedItem({ data: null, error: null, loading: true });
     http
-      .get(`/products/${id}`)
+      .get(`/products/${selectedItemId}`)
       .then((res) =>
         setSelectedItem({ data: res.data, error: null, loading: false })
       )
-      .catch((err) =>
-        setSelectedItem({ data: null, error: err, loading: false })
-      );
+      .catch((err) => {
+        setSelectedItem({ data: null, error: err, loading: false });
+        toast.error(err.message);
+      });
   }, []);
-  useEffect(() => {
-    initialLoading();
-  }, []);
+
   function findId(item) {
-    console.log(card);
-    console.log(card.data.findIndex((element) => element.id === item));
-    return card.data.findIndex((element) => element.id === item);
+    return card.data.findIndex((element) => element.id.toString() === item);
   }
+  const clickk = () => {
+    addToCart(selectedItem.data);
+    window.location.reload(false);
+  };
 
   if (selectedItem.loading) return <p>loading</p>;
   if (selectedItem.data) {
@@ -55,14 +57,15 @@ const ProductDetail = () => {
             <p>+</p>
           </div>
           <button
+            disabled={findId(selectedItemId) >= 0 ? true : false}
             className={`p-2 rounded bg-gray-600 ${
-              findId(id) >= 0
-                ? "cursor-not-allowed bg-opacity-40"
+              findId(selectedItemId) >= 0
+                ? "cursor-not-allowed bg-opacity-40 disabled"
                 : "cursor-pointer"
             } `}
-            onClick={() => addToCart(id)}
+            onClick={clickk}
           >
-            {findId(id) >= 0 ? "Added in cart" : "Add to basket"}
+            {findId(selectedItemId) >= 0 ? "Added in cart" : "Add to basket"}
           </button>
         </div>
       </div>

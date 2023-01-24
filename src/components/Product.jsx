@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import { useCard, useCardActions } from "../Providers/CardProvider";
-import { useEffect } from "react";
 
 const Product = ({
   id,
@@ -45,6 +44,7 @@ const Product = ({
           <p className="bg-red-700 px-2 py-1 rounded-full">{discount} %</p>
         </div>
         <button
+          disabled={findId(id) >= 0 ? true : false}
           className={`p-2 rounded bg-gray-600 ${
             findId(id) >= 0
               ? "cursor-not-allowed bg-opacity-40"

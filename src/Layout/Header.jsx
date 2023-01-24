@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 
 const Header = () => {
   const { data } = useCard();
+  const { initialLoading } = useCardActions();
   const [showHam, setShowHam] = useState(false);
+  useEffect(() => {initialLoading()}, []);
   return (
     <div className="max-h-40 sticky top-4 mb-10">
       <RxHamburgerMenu

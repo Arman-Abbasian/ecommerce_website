@@ -38,9 +38,6 @@ const Products = () => {
       });
   }, []);
 
-useEffect(()=>{
-  initialLoading();
-},[])
 
   if (products.loading) return <p>loading</p>;
   if (products.data && products.data.length === 0)
