@@ -13,6 +13,7 @@ const ProductDetail = () => {
     error: null,
     loading: false,
   });
+  const [cardItem, setCardItem] = useState(null);
   useEffect(() => {
     setSelectedItem({ data: null, error: null, loading: true });
     http
@@ -29,33 +30,24 @@ const ProductDetail = () => {
   function findId(item) {
     return card.data.findIndex((element) => element.id.toString() === item);
   }
-  const clickk = () => {
-    addToCart(selectedItem.data);
-    window.location.reload(false);
-  };
-
   if (selectedItem.loading) return <p>loading</p>;
-  if (selectedItem.data) {
+  if (selectedItem.data && card.data) {
     return (
-      <div className="flex">
+      <div className="flex flex-col">
         <div className="flex-1">image</div>
         <div>
-          <p>cover 405</p>
-          <p>peugot 405</p>
-          <p>1000$</p>
-          <p>20%</p>
-          <p>800$</p>
+          <p>{selectedItem.data.name}</p>
+          <p>{selectedItem.data.car}</p>
+          <p>{selectedItem.data.price} $</p>
+          <p>{selectedItem.data.discount} %</p>
+          <p>{selectedItem.data.reducedPrice}$</p>
           <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. In modi
             enim corporis soluta eius maiores similique ipsam doloremque fugiat,
             fuga, voluptates quae excepturi repudiandae velit amet perferendis
             dolores maxime cupiditate.
           </p>
-          <div className="flex gap-2">
-            <p>-</p>
-            <p>2</p>
-            <p>+</p>
-          </div>
+          <div className="flex gap-2"></div>
           <button
             disabled={findId(selectedItemId) >= 0 ? true : false}
             className={`p-2 rounded bg-gray-600 ${
@@ -63,7 +55,7 @@ const ProductDetail = () => {
                 ? "cursor-not-allowed bg-opacity-40 disabled"
                 : "cursor-pointer"
             } `}
-            onClick={clickk}
+            onClick={() => addToCart(selectedItem.data)}
           >
             {findId(selectedItemId) >= 0 ? "Added in cart" : "Add to basket"}
           </button>

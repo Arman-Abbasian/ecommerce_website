@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
-import { useCard, useCardActions } from "../Providers/CardProvider";
+import { useCard } from "../Providers/CardProvider";
 
 const Product = ({
   id,
