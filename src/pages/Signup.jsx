@@ -10,7 +10,7 @@ import {
   IoMailOpenOutline,
 } from "react-icons/io5";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const initialValues = {
   userName: "",
@@ -39,13 +39,15 @@ const phoneSchema = Yup.string()
   .required();
 
 const Signup = () => {
+  const navigate = useNavigate();
   const onSubmit = (values, { resetForm }) => {
-    const {userName,email,phnoeNumber,password}=values;
-    const newValues={userName,email,phnoeNumber,password}
+    const { userName, email, phnoeNumber, password } = values;
+    const newValues = { userName, email, phnoeNumber, password };
     http
       .post(`/user`, newValues)
       .then((res) => {
         toast.success(`user made successfully`);
+        navigate("/Login");
       })
       .catch((err) => toast.error(err.message));
     resetForm();

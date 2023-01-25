@@ -44,7 +44,7 @@ const Login = () => {
       if (item) {
         const checkPassword = item.password === values.password;
         if (checkPassword) {
-          setUser(users.data[0]);
+          setUser(item);
           navigate("/Products");
         } else {
           setLoginError("email or password is wrong");
