@@ -47,15 +47,28 @@
   ],
   "card": [
     {
-      "id": 1,
-      "name": "cover 405",
-      "image": "/images/products/cover 405.png",
-      "imgAlt": "cover 405",
+      "id": 2,
+      "name": "cover 206",
+      "car": "peugeot 206",
+      "image": "/images/products/cover 206.png",
+      "imgAlt": "cover 206",
       "score": 4.7,
-      "price": 1200,
-      "reducedPrice": 1080,
-      "discount": 10,
+      "price": 1400,
+      "reducedPrice": 1120,
+      "discount": 20,
       "quantity": 1
+    },
+    {
+      "id": 3,
+      "name": "cover pride",
+      "car": "pride",
+      "image": "/images/products/cover pride.png",
+      "imgAlt": "cover pride",
+      "score": 4.8,
+      "price": 500,
+      "reducedPrice": 400,
+      "discount": 20,
+      "quantity": 2
     }
   ],
   "user": [

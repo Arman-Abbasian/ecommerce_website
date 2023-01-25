@@ -1,4 +1,15 @@
-const OneBasketItem = ({ image, imgAlt, name, quantity,reducedPrice }) => {
+import { BiMinus, BiPlus, BiTrash } from "react-icons/bi";
+import { useCardActions } from "../Providers/CardProvider";
+
+const OneBasketItem = ({
+  image,
+  imgAlt,
+  name,
+  quantity,
+  reducedPrice,
+  item,
+}) => {
+  const { addCardItemQuantity, minusCardItemQuantity } = useCardActions();
   return (
     <div className="flex justify-between items-center border rounded p-2">
       <div className="flex items-center gap-4">
@@ -12,12 +23,22 @@ const OneBasketItem = ({ image, imgAlt, name, quantity,reducedPrice }) => {
         <p>{name}</p>
       </div>
       <div className="flex items-center gap-4">
-            <p>{quantity*reducedPrice}</p>
-            <div className="flex items-center border rounded gap-8 p-2">
-        <span>-</span>
-        <span>{quantity}</span>
-        <span>+</span>
-      </div>
+        <p>{quantity * reducedPrice}</p>
+        <div className="flex items-center border rounded gap-8 p-2">
+          <span
+            className="cursor-pointer w-full h-full"
+            onClick={() => minusCardItemQuantity(item)}
+          >
+            {quantity === 1 ? <BiTrash /> : <BiMinus />}
+          </span>
+          <span>{quantity}</span>
+          <span
+            className="cursor-pointer w-full h-full"
+            onClick={() => addCardItemQuantity(item)}
+          >
+            <BiPlus />
+          </span>
+        </div>
       </div>
     </div>
   );

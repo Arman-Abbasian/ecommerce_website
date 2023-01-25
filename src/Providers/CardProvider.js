@@ -43,5 +43,33 @@ export const useCardActions=()=>{
         })
         .catch(err=>toast.error(err.message))
     };
-    return{initialLoading,addToCart}
+    //add quantity to card item
+    const addCardItemQuantity=(item)=>{
+        item.quantity++;
+        http.put(`/card/${item.id}`,item)
+        .then(res=>{
+            initialLoading();
+        })
+        .catch(err=>toast.error(err.message))
+    };
+    //minus quantity to card item
+    const minusCardItemQuantity=(item)=>{
+        if(item.quantity===1){
+            http.delete(`/card/${item.id}`)
+            .then(res=>{
+                initialLoading();
+            })
+            .catch(err=>toast.error(err.message))
+        }else{
+            item.quantity--;
+            http.put(`/card/${item.id}`,item)
+            .then(res=>{
+                initialLoading();
+            })
+            .catch(err=>toast.error(err.message))
+        }
+       
+    };
+
+    return{initialLoading,addToCart,addCardItemQuantity,minusCardItemQuantity}
 }
