@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import http from "../services/httpService";
 import { IoMailOpenOutline } from "react-icons/io5";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -18,19 +18,37 @@ const validationSchema = Yup.object({
   password: Yup.string().required("password is required"),
 });
 const Login = () => {
-  const [users,setUsers]=useState({data:null,error:null,loading:false});
-  useEffect(()=>{
-    http.get('/user')
-    .then(res=>setUsers({data:null,error:null,loading:false}))
-    .catch()
-  },[])
-  const onSubmit = (values, { resetForm }) => {
+  const [users, setUsers] = useState({
+    data: null,
+    error: null,
+    loading: false,
+  });
+  const [loginError, setLoginError] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    setUsers({ data: null, error: null, loading: true });
     http
-      .post(`/users`, values)
-      .then((res) => {
-        toast.success(`user made successfully`);
-      })
-      .catch((err) => toast.error(err.message));
+      .get("/user")
+      .then((res) => setUsers({ data: res.data, error: null, loading: false }))
+      .catch((err) => {
+        toast.error(err.message);
+        setUsers({ data: null, error: err, loading: false });
+      });
+  }, []);
+  const onSubmit = (values, { resetForm }) => {
+    if (users.data) {
+      const item = users.data.find((element) => element.email === values.email);
+      if (item) {
+        const checkPassword = item.password === values.password;
+        if (checkPassword) {
+          navigate("/Products");
+        } else {
+          setLoginError("email or password is wrong");
+        }
+      } else {
+        setLoginError("email or password is wrong");
+      }
+    }
     resetForm();
   };
 
@@ -63,8 +81,9 @@ const Login = () => {
             className="py-2 px-4 bg-primary_cream rounded-sm w-full disabled:bg-opacity-60"
             type="submit"
           >
-            {formik.isValid ? "Add" : "please fill all fields"}
+            {formik.isValid ? "Enter" : "please fill all fields"}
           </button>
+          {loginError && <p>{loginError}</p>}
           <Link to={"/Signup"}>not sign up yet?</Link>
         </div>
       </form>
