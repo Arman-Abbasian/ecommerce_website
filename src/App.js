@@ -5,16 +5,19 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import CardProvider from './Providers/CardProvider';
+import UserProvider from './Providers/UserProvider';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <UserProvider>
       <CardProvider>
         <Layout>
           <Routee />
         </Layout>
         </CardProvider>
+      </UserProvider>
         <Toaster />
       </BrowserRouter>
     </div>

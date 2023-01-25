@@ -8,6 +8,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useUserActions } from "../Providers/UserProvider";
 
 const initialValues = {
   email: "",
@@ -23,6 +24,7 @@ const Login = () => {
     error: null,
     loading: false,
   });
+  const setUser = useUserActions();
   const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
@@ -35,12 +37,14 @@ const Login = () => {
         setUsers({ data: null, error: err, loading: false });
       });
   }, []);
+
   const onSubmit = (values, { resetForm }) => {
     if (users.data) {
       const item = users.data.find((element) => element.email === values.email);
       if (item) {
         const checkPassword = item.password === values.password;
         if (checkPassword) {
+          setUser(users.data);
           navigate("/Products");
         } else {
           setLoginError("email or password is wrong");

@@ -3,12 +3,16 @@ import { BsBasket3 } from "react-icons/bs";
 import { useCard, useCardActions } from "../Providers/CardProvider";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useEffect, useState } from "react";
+import { useUser } from "../Providers/UserProvider";
 
 const Header = () => {
   const { data } = useCard();
   const { initialLoading } = useCardActions();
   const [showHam, setShowHam] = useState(false);
-  useEffect(() => {initialLoading()}, []);
+  const user = useUser();
+  useEffect(() => {
+    initialLoading();
+  }, []);
   return (
     <div className="max-h-40 sticky top-4 mb-10">
       <RxHamburgerMenu
@@ -27,10 +31,10 @@ const Header = () => {
           </li>
           <li className="w-1/3 md:w-full">
             <Link
-              to="/Login"
+              to={user ?"/Profile":"/Login"}
               className="flex items-center md:px-8 h-full hover:bg-red-500 rounded"
             >
-              Login
+              {user ? 'profile':'Login'}
             </Link>
           </li>
           <li className="w-1/3 md:w-full">
