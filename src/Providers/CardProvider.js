@@ -44,7 +44,7 @@ export const useCardActions=()=>{
        const cloneCard=[...card];
       const cardItem= cloneCard.find(element=>element.id===item.id);
       cardItem.quantity++;
-      setCard(cloneCard);
+      localStorage.setItem("card",JSON.stringify(cloneCard));
       initialLoading();
 
     };
@@ -55,11 +55,11 @@ export const useCardActions=()=>{
         if(cardItem.quantity===1){
             
       const remaindItems= cloneCard.filter(element=>element.id!==item.id);
-      setCard(remaindItems);
+      localStorage.setItem("card",JSON.stringify(remaindItems));
       initialLoading();
         }else{
             cardItem.quantity--;
-      setCard(cloneCard);
+            localStorage.setItem("card",JSON.stringify(cloneCard));
       initialLoading();
         }
        
