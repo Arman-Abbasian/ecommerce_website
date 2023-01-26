@@ -5,10 +5,10 @@ import { toast } from "react-hot-toast";
 import http from "../services/httpService";
 import { IoMailOpenOutline } from "react-icons/io5";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useUserActions } from "../Providers/UserProvider";
+import { useUser, useUserActions } from "../Providers/UserProvider";
 
 const initialValues = {
   email: "",
@@ -24,9 +24,17 @@ const Login = () => {
     error: null,
     loading: false,
   });
+  const user = useUser();
   const setUser = useUserActions();
   const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const term = queryParams.get("redirect");
+  console.log(user);
+  if (user) {
+    navigate(`/${term}`);
+  }
   useEffect(() => {
     setUsers({ data: null, error: null, loading: true });
     http
@@ -45,7 +53,11 @@ const Login = () => {
         const checkPassword = item.password === values.password;
         if (checkPassword) {
           setUser(item);
-          navigate("/Products");
+          if (term) {
+            navigate(`/${term}`);
+          } else {
+            navigate("/Products");
+          }
         } else {
           setLoginError("email or password is wrong");
         }

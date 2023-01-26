@@ -1,22 +1,17 @@
+import { Link } from "react-router-dom";
 import OneBasketItem from "../components/OneBasketItem";
 import { useCard } from "../Providers/CardProvider";
 
 const Basket = () => {
   const { data } = useCard();
-  console.log(data)
-  function productsPrice(){
-   return data.reduce(
-      (acc, cur) => acc + (cur.price*cur.quantity),
-      0
-    );
-  };
-  function yourPrice(){
-    return data.reduce(
-       (acc, cur) => acc + (cur.reducedPrice*cur.quantity),
-       0
-     );
-   }
-  if(data && data.length===0) return <div>no Item in Basket</div>
+  console.log(data);
+  function productsPrice() {
+    return data.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
+  }
+  function yourPrice() {
+    return data.reduce((acc, cur) => acc + cur.reducedPrice * cur.quantity, 0);
+  }
+  if (data && data.length === 0) return <div>no Item in Basket</div>;
   if (data && data.length > 0) {
     return (
       <div className="flex flex-col gap-4">
@@ -42,9 +37,9 @@ const Basket = () => {
           </div>
           <div>
             <h3>your discount</h3>
-            <p>{productsPrice()-yourPrice()} $</p>
+            <p>{productsPrice() - yourPrice()} $</p>
           </div>
-          <button>check out</button>
+          <Link to="/Login?redirect=Checkout">check out</Link>
         </div>
       </div>
     );
