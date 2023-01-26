@@ -1,12 +1,13 @@
 import http from "../services/httpService";
 import { createContext, useContext, useState } from "react";
 import { toast } from "react-hot-toast";
+import { json } from "react-router-dom";
 
 const CardContext=createContext();
 const CardContextDispatcher=createContext();
 
 const CardProvider = ({children}) => {
-    const [card,setCard]=useState({data:null,error:null,loading:false})
+    const [card,setCard]=useState(null)
 ;    return ( 
         <CardContext.Provider value={card}>
             <CardContextDispatcher.Provider value={setCard}>
@@ -24,49 +25,42 @@ export const useCardActions=()=>{
 
     //get card
     const initialLoading=()=>{
-        setCard({data:null,error:null,loading:true});
-        http.get(`/card`)
-        .then(res=>{
-            setCard({data:res.data,error:null,loading:false});
-        })
-        .catch(err=>{
-            setCard({data:null,error:err,loading:false});
-            toast.error(err.message)
-        });
+       setCard (JSON.parse(localStorage.getItem("card"))||[])
     };
     //add card item
     const addToCart=(item)=>{
-        http.post("/card",{...item,quantity:1})
-        .then(res=>{
-            initialLoading();
+        try {
+            var cloneCard = [...card]
+            cloneCard.push({...item,quantity:1});
+            localStorage.setItem("card",JSON.stringify(cloneCard));
             toast.success(`${item.name} added to card successfully`)
-        })
-        .catch(err=>toast.error(err.message))
+            initialLoading();
+        } catch (error) {
+            toast.error(error.message)
+        }
     };
     //add quantity to card item
     const addCardItemQuantity=(item)=>{
-        item.quantity++;
-        http.put(`/card/${item.id}`,item)
-        .then(res=>{
-            initialLoading();
-        })
-        .catch(err=>toast.error(err.message))
+       const cloneCard=[...card];
+      const cardItem= cloneCard.find(element=>element.id===item.id);
+      cardItem.quantity++;
+      setCard(cloneCard);
+      initialLoading();
+
     };
     //minus quantity to card item
     const minusCardItemQuantity=(item)=>{
-        if(item.quantity===1){
-            http.delete(`/card/${item.id}`)
-            .then(res=>{
-                initialLoading();
-            })
-            .catch(err=>toast.error(err.message))
+        const cloneCard=[...card];
+        const cardItem=cloneCard.find(element=>element.id===item.id);
+        if(cardItem.quantity===1){
+            
+      const remaindItems= cloneCard.filter(element=>element.id!==item.id);
+      setCard(remaindItems);
+      initialLoading();
         }else{
-            item.quantity--;
-            http.put(`/card/${item.id}`,item)
-            .then(res=>{
-                initialLoading();
-            })
-            .catch(err=>toast.error(err.message))
+            cardItem.quantity--;
+      setCard(cloneCard);
+      initialLoading();
         }
        
     };

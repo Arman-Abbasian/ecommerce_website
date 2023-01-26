@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "../Providers/UserProvider";
 
 const Header = () => {
-  const { data } = useCard();
+  const card = useCard();
   const { initialLoading } = useCardActions();
   const [showHam, setShowHam] = useState(false);
   const user = useUser();
@@ -52,7 +52,7 @@ const Header = () => {
             >
               <BsBasket3 className="w-6 h-6" />
               <span className="absolute flex justify-center items-center -top-4 right-28 w-5 h-5 rounded-full bg-red-600">
-                {data ? data.length : 0}
+                {card ? card.length : 0}
               </span>
             </Link>
           </li>

@@ -12,11 +12,11 @@ const Product = ({
   discount,
   addToCart,
 }) => {
-  const { data } = useCard();
-  console.log(data);
+  const card = useCard();
+  console.log(card);
   function findId(item) {
-    if (data) {
-      return data.findIndex((element) => element.id === item);
+    if (card) {
+      return card.findIndex((element) => element.id === item);
     } else {
       return -1;
     }

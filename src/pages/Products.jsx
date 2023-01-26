@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
@@ -12,7 +11,7 @@ const Products = () => {
     error: null,
     loading: false,
   });
-  const {addToCart,initialLoading}=useCardActions();
+  const {addToCart}=useCardActions();
   useEffect(() => {
     setProducts({
       data: null,
