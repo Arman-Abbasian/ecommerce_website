@@ -1,71 +1,69 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCard } from "../Providers/CardProvider";
 import { useUser } from "../Providers/UserProvider";
 
 const Checkout = () => {
   const user = useUser();
+  const card = useCard();
   const navigate = useNavigate();
-
+  console.log(card);
   useEffect(() => {
     if (!user) {
       navigate("/Login?redirect=Checkout");
     }
   }, []);
+  function totalPrice() {
+    return card.reduce(
+      (acc, curr) => acc + curr.quantity * curr.reducedPrice,
+      0
+    );
+  }
   return (
     <div>
-      <div class="flex flex-col">
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="overflow-hidden">
-              <table class="min-w-full text-center">
-                <thead class="border-b bg-gray-800">
-                  <tr>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-white px-6 py-4"
-                    >
-                      row
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-white px-6 py-4"
-                    >
-                      product
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-white px-6 py-4"
-                    >
-                      number
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-white px-6 py-4"
-                    >
-                      cost
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="bg-white border-b">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      1
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      Mark
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      Otto
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      @mdo
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+      <div className="overflow-hidden">
+        <table className="min-w-full text-center">
+          <thead className="border-b bg-gray-800">
+            <tr>
+              <th
+                scope="col"
+                className="text-sm font-medium text-white px-6 py-4"
+              >
+                product
+              </th>
+              <th
+                scope="col"
+                className="text-sm font-medium text-white px-6 py-4"
+              >
+                number
+              </th>
+              <th
+                scope="col"
+                className="text-sm font-medium text-white px-6 py-4"
+              >
+                cost
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {card &&
+              card.map((item) => (
+                <tr key={item.id} className="bg-white border-b">
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    {item.name}
+                  </td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    {item.quantity}
+                  </td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    {item.quantity * item.reducedPrice}
+                  </td>
+                </tr>
+              ))}
+            <p>total: {totalPrice()}</p>
+          </tbody>
+        </table>
+        <button>pay</button>
       </div>
     </div>
   );

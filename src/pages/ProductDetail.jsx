@@ -28,10 +28,10 @@ const ProductDetail = () => {
   }, []);
 
   function findId(item) {
-    return card.data.findIndex((element) => element.id.toString() === item);
+    return card.findIndex((element) => element.id.toString() === item);
   }
   if (selectedItem.loading) return <p>loading</p>;
-  if (selectedItem.data && card.data) {
+  if (selectedItem.data && card) {
     return (
       <div className="flex flex-col">
         <div className="flex-1">image</div>
