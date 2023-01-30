@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCard } from "../Providers/CardProvider";
 import { useUser } from "../Providers/UserProvider";
 
@@ -7,17 +7,18 @@ const Checkout = () => {
   const user = useUser();
   const card = useCard();
   const navigate = useNavigate();
-  console.log(card);
   useEffect(() => {
     if (!user) {
       navigate("/Login?redirect=Checkout");
     }
   }, []);
   function totalPrice() {
+    if(user){
     return card.reduce(
       (acc, curr) => acc + curr.quantity * curr.reducedPrice,
       0
     );
+  }
   }
   return (
     <div>
@@ -63,7 +64,7 @@ const Checkout = () => {
             <p>total: {totalPrice()}</p>
           </tbody>
         </table>
-        <button>pay</button>
+        <button><Link to={'/Pay'}>pay</Link></button>
       </div>
     </div>
   );
