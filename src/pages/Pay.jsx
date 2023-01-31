@@ -1,13 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useCard } from "../Providers/CardProvider";
+import { useCard, useCardActions } from "../Providers/CardProvider";
 import { useUser } from "../Providers/UserProvider";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import axios from "axios";
+import http from "../services/httpService";
 
 const Pay = () => {
   const user = useUser();
   const card = useCard();
+  const { initialLoading } = useCardActions();
   const navigate = useNavigate();
   const [inputValues, setInputValues] = useState({
     cardNumber: "",
@@ -53,8 +56,15 @@ const Pay = () => {
     } else if (inputValues.month.length != 2 || inputValues.year.length != 2) {
       toast.error("month und year must be 2 character");
     } else {
-      toast.success("pay successfully");
-      console.log(card)
+      http
+        .post("/sales", { card, user: user.id, date: Date() })
+        .then((res) => {
+          toast.success("pay successfully");
+          localStorage.removeItem("card");
+          initialLoading();
+          navigate("/Products");
+        })
+        .catch((err) => toast.error(err.message));
     }
   };
   return (
