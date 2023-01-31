@@ -12,10 +12,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <UserProvider>
-      <CardProvider>
-        <Layout>
+      <CardProvider> 
           <Routee />
-        </Layout>
         </CardProvider>
       </UserProvider>
         <Toaster />
