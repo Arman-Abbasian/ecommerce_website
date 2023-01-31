@@ -26,6 +26,7 @@
     "react-router-dom": "^6.5.0",
     "react-scripts": "5.0.1",
     "resize-observer-polyfill": "^1.5.1",
+    "swiper": "^8.4.7",
     "tailwind-scrollbar-hide": "^1.1.7",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11",
