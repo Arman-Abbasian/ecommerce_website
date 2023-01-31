@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 // import required modules
-import { Navigation } from "swiper";
+import { Navigation,Autoplay } from "swiper";
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
 
@@ -18,7 +18,11 @@ export default function Main() {
       <div className="rounded shadow-md drop-shadow-xl shadow-primary_dark_blue flex-auto">
         <Swiper
           navigation={true}
-          modules={[Navigation]}
+          modules={[Navigation,Autoplay]}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           className="mySwiper w-full h-full"
         >
           <SwiperSlide className="flex justify-center items-center relative">
