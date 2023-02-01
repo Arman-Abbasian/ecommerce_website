@@ -15,7 +15,7 @@ export default function Main() {
       <div className="flex-initial">
         <Header />
       </div>
-      <div className="rounded shadow-md drop-shadow-xl shadow-primary_dark_blue flex-auto">
+      <div className="rounded shadow-md drop-shadow-xl shadow-primary_dark_blue flex-auto mt-6">
         <Swiper
           navigation={true}
           modules={[Navigation, Autoplay]}
