@@ -80,7 +80,7 @@ const Login = () => {
       <Layout>
         <div className="flex flex-col gap-3 container mx-auto max-w-lg">
           <form onSubmit={formik.handleSubmit}>
-            <div className="flex flex-col gap-4 justify-center items-center border rounded-sm p-2  shadow-[rgba(236,_243,_158,_0.4)_0px_30px_90px]">
+            <div className="flex flex-col gap-4 justify-center items-center border border-primary_dark_blue rounded-sm p-2  shadow-[rgba(236,_243,_158,_0.4)_0px_30px_90px]">
               <Input
                 name="email"
                 type="email"
