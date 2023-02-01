@@ -8,7 +8,7 @@ const Input = ({ name, type = "text", formik, logo, label }) => {
         <div className="border rounded-sm focus:border-2 flex items-center w-full p-2 gap-2">
           <span>{logo}</span>
           <input
-            className=" w-full rounded-md border-none focus:border-none focus:outline-none flex-1 bg-transparent "
+            className=" w-full rounded-md border-none focus:border-none focus:outline-none flex-1 bg-transparent"
             type={type}
             id={name}
             name={name}
