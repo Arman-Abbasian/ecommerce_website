@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 // import required modules
-import { Navigation,Autoplay } from "swiper";
+import { Navigation, Autoplay } from "swiper";
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
 
@@ -18,7 +18,7 @@ export default function Main() {
       <div className="rounded shadow-md drop-shadow-xl shadow-primary_dark_blue flex-auto">
         <Swiper
           navigation={true}
-          modules={[Navigation,Autoplay]}
+          modules={[Navigation, Autoplay]}
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,
@@ -34,7 +34,7 @@ export default function Main() {
                   class="w-full h-full object-center object-contain"
                 />
               </div>
-              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-12">
+              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-8">
                 <h1 className="text-xl font-bold mb-2">cover 405</h1>
                 <p className="flex items-center gap-2 font-bold">peugeot 405</p>
                 <p>
@@ -53,7 +53,7 @@ export default function Main() {
                   class="w-full h-full object-center object-contain"
                 />
               </div>
-              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-12">
+              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-8">
                 <h1 className="text-xl font-bold mb-2">cover 206</h1>
                 <p className="flex items-center gap-2 font-bold">peugeot 405</p>
                 <p>
@@ -72,7 +72,7 @@ export default function Main() {
                   class="w-full h-full object-center object-contain"
                 />
               </div>
-              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-12">
+              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-8">
                 <h1 className="text-xl font-bold mb-2">cover pride</h1>
                 <p className="flex items-center gap-2 font-bold">Pride</p>
                 <p>
@@ -91,7 +91,7 @@ export default function Main() {
                   class="w-full h-full object-center object-contain"
                 />
               </div>
-              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-12">
+              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-8">
                 <h1 className="text-xl font-bold mb-2">cover tiba</h1>
                 <p className="flex items-center gap-2 font-bold">Tiba</p>
                 <p>
@@ -110,7 +110,7 @@ export default function Main() {
                   class="w-full h-full object-center object-contain"
                 />
               </div>
-              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-12">
+              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-8">
                 <h1 className="text-xl font-bold mb-2">cover 405</h1>
                 <p className="flex items-center gap-2 font-bold">peugeot 405</p>
                 <p>
@@ -129,7 +129,7 @@ export default function Main() {
                   class="w-full h-full object-center object-contain"
                 />
               </div>
-              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-12">
+              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-8">
                 <h1 className="text-xl font-bold mb-2">spring seat 206</h1>
                 <p className="flex items-center gap-2 font-bold">peugeot 206</p>
                 <p>
@@ -148,7 +148,7 @@ export default function Main() {
                   class="w-full h-full object-center object-contain"
                 />
               </div>
-              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-12">
+              <div className="py-4 px-12 bg-primary_dark_blue w-full rounded bg-opacity-70 text-primary_light_gray -mt-8">
                 <h1 className="text-xl font-bold mb-2">spring seat tiba</h1>
                 <p className="flex items-center gap-2 font-bold">tiba</p>
                 <p>
