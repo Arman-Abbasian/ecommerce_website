@@ -11,6 +11,9 @@ import {
 } from "react-icons/io5";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
+import Layout from "../Layout/Layout";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const initialValues = {
   userName: "",
@@ -22,7 +25,7 @@ const initialValues = {
 const passwordRegExp = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 const validationSchema = Yup.object({
   userName: Yup.string().required(`$user name  is required`),
-  phnoeNumber: Yup.string().required("phone number is required"),
+  phoneNumber: Yup.string().required("phone number is required"),
   email: Yup.string().required("phone number is required"),
   password: Yup.string()
     .required("password is required")
@@ -39,18 +42,41 @@ const phoneSchema = Yup.string()
   .required();
 
 const Signup = () => {
+  const [users, setUsers] = useState(null);
   const navigate = useNavigate();
-  const onSubmit = (values, { resetForm }) => {
-    const { userName, email, phnoeNumber, password } = values;
-    const newValues = { userName, email, phnoeNumber, password };
+  useEffect(() => {
     http
-      .post(`/user`, newValues)
-      .then((res) => {
-        toast.success(`user made successfully`);
-        navigate("/Login");
-      })
+      .get("./user")
+      .then((res) => setUsers(res.data))
       .catch((err) => toast.error(err.message));
-    resetForm();
+  }, []);
+  const onSubmit = (values, { resetForm }) => {
+    const duplicateEmail = users.findIndex(
+      (item) => item.email.toLowerCase() === values.email.toLowerCase()
+    );
+    const duplicateMobile = users.findIndex(
+      (item) => item.phnoeNumber === values.phoneNumber
+    );
+    const duplicateMobiles = users.find(
+      (item) => item.phnoeNumber === values.phnoeNumber
+    );
+    if (duplicateEmail >= 0) {
+      toast.error("email already existed");
+    } else if (duplicateMobile >= 0) {
+      console.log(duplicateMobiles);
+      toast.error("mobile already existed");
+    } else {
+      const { userName, email, phnoeNumber, password } = values;
+      const newValues = { userName, email, phnoeNumber, password };
+      http
+        .post(`/user`, newValues)
+        .then((res) => {
+          toast.success(`user made successfully`);
+          navigate("/Login");
+        })
+        .catch((err) => toast.error(err.message));
+      resetForm();
+    }
   };
 
   const formik = useFormik({
@@ -60,55 +86,62 @@ const Signup = () => {
     validateOnMount: true,
   });
   return (
-    <div className="flex flex-col gap-3 container mx-auto max-w-md p-2">
-      <form onSubmit={formik.handleSubmit}>
-        <div className="flex flex-col gap-4 justify-center items-center border rounded-sm p-2  shadow-[rgba(236,_243,_158,_0.4)_0px_30px_90px]">
-          <Input
-            name="userName"
-            label="name"
-            formik={formik}
-            logo={<IoPersonOutline />}
-          />
-          <Input
-            name="phnoeNumber"
-            type="tel"
-            label="phone number"
-            formik={formik}
-            logo={<IoPhonePortraitOutline />}
-          />
-          <Input
-            name="email"
-            type="email"
-            label="email"
-            formik={formik}
-            logo={<IoMailOpenOutline />}
-          />
-          <Input
-            name="password"
-            type="password"
-            label="password"
-            formik={formik}
-            logo={<RiLockPasswordLine />}
-          />
-          <Input
-            name="passwordConfirmation"
-            type="password"
-            label="password confirmation"
-            formik={formik}
-            logo={<RiLockPasswordLine />}
-          />
+    <Layout>
+      <div className="flex flex-col gap-3 container mx-auto max-w-lg">
+        <form onSubmit={formik.handleSubmit}>
+          <div className="flex flex-col gap-4 justify-center items-center border border-primary_dark_blue rounded p-2">
+            <Input
+              name="userName"
+              label="name"
+              formik={formik}
+              logo={<IoPersonOutline />}
+            />
+            <Input
+              name="phoneNumber"
+              type="tel"
+              label="phone number"
+              formik={formik}
+              logo={<IoPhonePortraitOutline />}
+            />
+            <Input
+              name="email"
+              type="email"
+              label="email"
+              formik={formik}
+              logo={<IoMailOpenOutline />}
+            />
+            <Input
+              name="password"
+              type="password"
+              label="password"
+              formik={formik}
+              logo={<RiLockPasswordLine />}
+            />
+            <Input
+              name="passwordConfirmation"
+              type="password"
+              label="password confirmation"
+              formik={formik}
+              logo={<RiLockPasswordLine />}
+            />
 
-          <button
-            disabled={!formik.isValid}
-            className="py-2 px-4 rounded-sm w-full disabled:bg-opacity-60"
-            type="submit"
-          >
-            {formik.isValid ? "Add" : "please fill all fields"}
-          </button>
-          <Link to={"/Login"}>already login?</Link>
-        </div>
-      </form>
-    </div>
+            <button
+              disabled={!formik.isValid}
+              className="py-2 px-4 rounded-sm w-full disabled:bg-opacity-60 bg-primary_dark_blue"
+              type="submit"
+            >
+              {formik.isValid ? "Add" : "please fill all fields"}
+            </button>
+            <Link
+              to={"/Login"}
+              className="text-primary_dark_blue block w-full text-start"
+            >
+              already login?
+            </Link>
+          </div>
+        </form>
+      </div>
+    </Layout>
   );
 };
 export default Signup;

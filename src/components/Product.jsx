@@ -23,7 +23,7 @@ const Product = ({
   }
 
   return (
-    <div key={id} className="border border-red-600 w-64">
+    <div key={id} className="w-64 shadow-lg shadow-primary_dark_blue rounded">
       <Link to={`/ProductDetail/${id}`}>
         <div class="aspect-w-1 aspect-h-1">
           <img
@@ -36,7 +36,7 @@ const Product = ({
       <div className="p-4 flex flex-col gap-2">
         <h2>{productName}</h2>
         <div className="flex items-center gap-1">
-          <AiFillStar className="fill-yellow-500 stroke-orange-300" />
+          <AiFillStar className="fill-yellow-600 stroke-orange-300" />
           <p>{score}</p>
         </div>
         <div className="flex justify-between items-center">
@@ -45,7 +45,7 @@ const Product = ({
         </div>
         <button
           disabled={findId(id) >= 0 ? true : false}
-          className={`p-2 rounded bg-gray-600 ${
+          className={`p-2 rounded bg-primary_dark_blue ${
             findId(id) >= 0
               ? "cursor-not-allowed bg-opacity-40"
               : "cursor-pointer"

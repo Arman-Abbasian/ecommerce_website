@@ -15,7 +15,7 @@ const Header = () => {
     initialLoading();
   }, []);
   return (
-    <div className="max-h-40 sticky top-4 mb-10 flex-initial">
+    <div className="max-h-40 sticky top-4 mb-10 flex-initial z-10">
       <RxHamburgerMenu
         onClick={() => setShowHam(!showHam)}
         className="md:hidden bg-primary_dark_blue rounded cursor-pointer w-10 h-10 p-2 text-3xl"
@@ -23,7 +23,7 @@ const Header = () => {
       <nav
         className={`h-full ${
           showHam ? "block" : "hidden"
-        } md:block container mx-auto max-w-5xl`}
+        } md:block container mx-auto max-w-5xl mb-6 `}
       >
         <ul className="flex flex-col md:flex-row md:justify-evenly gap-2 h-full mt-2 bg-primary_dark_blue p-1 rounded">
           <li className="w-1/3 md:w-full">
