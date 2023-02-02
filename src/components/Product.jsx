@@ -41,7 +41,7 @@ const Product = ({
         </div>
         <div className="flex justify-between items-center">
           <p>{price} $</p>
-          <p className="bg-red-700 px-2 py-1 rounded-full">{discount} %</p>
+          <p className="bg-red-700 px-3 py-1 rounded-full">{discount} %</p>
         </div>
         <button
           disabled={findId(id) >= 0 ? true : false}

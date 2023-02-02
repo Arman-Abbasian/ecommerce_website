@@ -43,6 +43,28 @@
       "price": 800,
       "reducedPrice": 640,
       "discount": 20
+    },
+    {
+      "id": 5,
+      "name": "spring seat 206",
+      "car": "peugeot 206",
+      "image": "/images/products/spring seat 206.png",
+      "imgAlt": "spring seat 206",
+      "score": 3.9,
+      "price": 300,
+      "reducedPrice": 270,
+      "discount": 10
+    },
+    {
+      "id": 6,
+      "name": "spring seat tiba",
+      "car": "tiba",
+      "image": "/images/products/spring seat tiba.png",
+      "imgAlt": "spring seat tiba",
+      "score": 4.6,
+      "price": 200,
+      "reducedPrice": 180,
+      "discount": 10
     }
   ],
   "user": [
