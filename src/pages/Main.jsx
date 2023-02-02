@@ -11,7 +11,7 @@ import Footer from "../Layout/Footer";
 
 export default function Main() {
   return (
-    <div className="h-screen p-4 flex flex-col gap-4">
+    <div className="h-screen flex flex-col gap-4">
       <div className="flex-initial">
         <Header />
       </div>

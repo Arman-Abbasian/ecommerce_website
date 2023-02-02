@@ -76,41 +76,42 @@ const Login = () => {
     validateOnMount: true,
   });
   return (
-    <div className="p-2">
-      <Layout>
-        <div className="flex flex-col gap-3 container mx-auto max-w-lg">
-          <form onSubmit={formik.handleSubmit}>
-            <div className="flex flex-col gap-4 justify-center items-center border border-primary_dark_blue rounded-sm p-2  shadow-[rgba(236,_243,_158,_0.4)_0px_30px_90px]">
-              <Input
-                name="email"
-                type="email"
-                label="email"
-                formik={formik}
-                logo={<IoMailOpenOutline />}
-              />
-              <Input
-                name="password"
-                type="password"
-                label="password"
-                formik={formik}
-                logo={<RiLockPasswordLine />}
-              />
-              <button
-                disabled={!formik.isValid}
-                className="py-2 px-4  rounded-sm w-full disabled:bg-opacity-60 bg-primary_dark_blue"
-                type="submit"
-              >
-                {formik.isValid ? "Enter" : "please fill all fields"}
-              </button>
-              {loginError && <p className="text-red-500">{loginError}</p>}
-              <Link className="text-primary_dark_blue block w-full text-start" to={"/Signup"}>
-                not sign up yet?
-              </Link>
-            </div>
-          </form>
-        </div>
-      </Layout>
-    </div>
+    <Layout>
+      <div className="flex flex-col gap-3 container mx-auto max-w-lg flex-auto mt-24">
+        <form onSubmit={formik.handleSubmit}>
+          <div className="flex flex-col gap-4 justify-center items-center border border-primary_dark_blue rounded-sm p-2  shadow-[rgba(236,_243,_158,_0.4)_0px_30px_90px]">
+            <Input
+              name="email"
+              type="email"
+              label="email"
+              formik={formik}
+              logo={<IoMailOpenOutline />}
+            />
+            <Input
+              name="password"
+              type="password"
+              label="password"
+              formik={formik}
+              logo={<RiLockPasswordLine />}
+            />
+            <button
+              disabled={!formik.isValid}
+              className="py-2 px-4  rounded-sm w-full disabled:bg-opacity-60 bg-primary_dark_blue"
+              type="submit"
+            >
+              {formik.isValid ? "Enter" : "please fill all fields"}
+            </button>
+            {loginError && <p className="text-red-500">{loginError}</p>}
+            <Link
+              className="text-primary_dark_blue block w-full text-start"
+              to={"/Signup"}
+            >
+              not sign up yet?
+            </Link>
+          </div>
+        </form>
+      </div>
+    </Layout>
   );
 };
 export default Login;

@@ -15,7 +15,7 @@ const Header = () => {
     initialLoading();
   }, []);
   return (
-    <div className="max-h-40 sticky top-4 mb-10">
+    <div className="max-h-40 sticky top-4 mb-10 flex-initial">
       <RxHamburgerMenu
         onClick={() => setShowHam(!showHam)}
         className="md:hidden bg-primary_dark_blue rounded cursor-pointer w-10 h-10 p-2 text-3xl"
