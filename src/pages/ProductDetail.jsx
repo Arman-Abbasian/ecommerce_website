@@ -47,7 +47,7 @@ const ProductDetail = () => {
   if (selectedItem.data && card) {
     return (
       <div className="flex flex-col">
-        {/* image section */}
+        {/* image section in mobile section */}
         <div className="sm:hidden">
           <Swiper
             effect={"coverflow"}
@@ -94,6 +94,41 @@ const ProductDetail = () => {
             </SwiperSlide>
           </Swiper>
         </div>
+            {/* image section in tablet section */}
+            <div className="sm:flex flex-col gap-2 hidden">
+              <div>
+              <div class="aspect-w-5 aspect-h-2 md:aspect-w-6 lg:aspect-w-7 xl:aspect-w-8">
+                <img
+                  src={selectedItem.data.image}
+                  alt={selectedItem.data.name}
+                  class="w-full h-full object-center object-contain"
+                />
+              </div>
+              </div>
+              <div className="flex items-center gap-4 container mx-auto max-w-4xl">
+              <div class="aspect-w-4 md:aspect-w-5 lg:aspect-w-6 xl:aspect-w-7 aspect-h-1 flex-1 bg-primary_dark_blue rounded">
+                <img
+                  src={selectedItem.data.image}
+                  alt={selectedItem.data.name}
+                  class="w-full h-full object-center object-contain p-1"
+                />
+              </div>
+              <div class="aspect-w-4 md:aspect-w-5 lg:aspect-w-6 xl:aspect-w-7 aspect-h-1 flex-1 bg-primary_dark_blue rounded">
+                <img
+                  src={selectedItem.data.image}
+                  alt={selectedItem.data.name}
+                  class="w-full h-full object-center object-contain p-1"
+                />
+              </div>
+              <div class="aspect-w-4 md:aspect-w-5 lg:aspect-w-6 xl:aspect-w-7 aspect-h-1 flex-1 bg-primary_dark_blue rounded">
+                <img
+                  src={selectedItem.data.image}
+                  alt={selectedItem.data.name}
+                  class="w-full h-full object-center object-contain p-1"
+                />
+              </div>
+              </div>
+            </div>
         {/* product detail */}
         <div>
           <p>{selectedItem.data.name}</p>

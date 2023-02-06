@@ -14,7 +14,8 @@ const Basket = () => {
   if (card && card.length === 0) return <div>no Item in Basket</div>;
   if (card && card.length > 0) {
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 container mx-auto max-w-lg">
+        <div className="mb-20 flex flex-col gap-2">
         {card.map((item) => (
           <OneBasketItem
             key={item.id}
@@ -26,20 +27,21 @@ const Basket = () => {
             item={item}
           />
         ))}
-        <div>
-          <div>
+        </div>
+        <div className="border border-primary_dark_blue p-2 rounded">
+          <div className="flex justify-between mb-2">
             <h3>products costs</h3>
             <p>{productsPrice()} $</p>
           </div>
-          <div>
+          <div className="flex justify-between mb-2">
             <h3>your costs</h3>
             <p>{yourPrice()} $</p>
           </div>
-          <div>
+          <div className="flex justify-between mb-8">
             <h3>your discount</h3>
             <p>{productsPrice() - yourPrice()} $</p>
           </div>
-          <Link to="/Login?redirect=Checkout">check out</Link>
+          <Link to="/Login?redirect=Checkout" className="bg-primary_dark_blue px-2 py-1 rounded flex justify-center items-center">check out</Link>
         </div>
       </div>
     );
