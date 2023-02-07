@@ -71,7 +71,7 @@ const Pay = () => {
     <div className="flex flex-col gap-3 container mx-auto max-w-md p-2">
       <p>total price : {totalPrice()}</p>
       <form onSubmit={submitHandler}>
-        <div className="w-full">
+        <div className="w-full mb-4">
           <label className="mb-2 block">card number</label>
           <input
             name="cardNumber"
@@ -79,23 +79,23 @@ const Pay = () => {
             maxLength="19"
             minLength="19"
             value={inputValues.cardNumber}
-            className="border w-full"
+            className="w-full border border-primary_dark_blue focus:bg-transparent rounded focus:outline-none  bg-transparent py-2 px-4"
           />
         </div>
 
-        <div className="w-full">
-          <label>ccv2</label>
+        <div className="w-full mb-4">
+          <label className="block mb-2">ccv2</label>
           <input
             name="ccv2"
             value={inputValues.ccv2}
             onChange={changeHandler}
-            className="border w-full"
+            className="w-1/3 border border-primary_dark_blue focus:bg-transparent rounded focus:outline-none  bg-transparent py-2 px-4"
           />
         </div>
-        <div>
-          <label className="mb-2 block text-center">exipre date</label>
+        <div className="w-full mb-4">
+          <label className="mb-2 block">exipre date</label>
           <div className="flex justify-center items-center gap-4">
-            <div>
+            <div className="flex-1">
               <label className="mb-2 block">year</label>
               <input
                 name="year"
@@ -103,10 +103,10 @@ const Pay = () => {
                 minLength="2"
                 value={inputValues.year}
                 onChange={changeHandler}
-                className="border"
+                className="w-full border border-primary_dark_blue focus:bg-transparent rounded focus:outline-none  bg-transparent py-2 px-4"
               />
             </div>
-            <div>
+            <div className="flex-1">
               <label className="mb-2 block">month</label>
               <input
                 name="month"
@@ -114,41 +114,49 @@ const Pay = () => {
                 minLength="2"
                 value={inputValues.month}
                 onChange={changeHandler}
-                className="border"
+                className="w-full border border-primary_dark_blue focus:bg-transparent rounded focus:outline-none  bg-transparent py-2 px-4"
               />
             </div>
           </div>
         </div>
 
-        <div>
-          <label className="mb-2 block">security code</label>
-          <input
-            name="securityCode"
-            value={inputValues.securityCode}
-            onChange={changeHandler}
-            className="border"
-          />
+        <div className="w-full mb-4 flex justify-center items-center gap-4">
+          <div className="flex-1">
+            <label className="mb-2 block">security code</label>
+            <input
+              name="securityCode"
+              value={inputValues.securityCode}
+              onChange={changeHandler}
+              className="w-full border border-primary_dark_blue focus:bg-transparent rounded focus:outline-none  bg-transparent py-2 px-4"
+            />
+          </div>
+          <div className="flex-1 self-end flex justify-center items-center bg-primary_dark_blue text-primary_light_gray py-3 rounded h-full">
+            <p>12345643</p>
+          </div>
         </div>
-        <div>
+        <div className="w-full mb-4">
           <label className="mb-2 block">code</label>
           <input
             name="code"
             value={inputValues.code}
             onChange={changeHandler}
-            className="border"
+            className="w-1/2 border border-primary_dark_blue focus:bg-transparent rounded focus:outline-none  bg-transparent py-2 px-4"
           />
         </div>
-        <div>
-          <label className="mb-2 email">email</label>
+        <div className="w-full mb-4">
+          <label className="mb-2 block">email</label>
           <input
             type="email"
             name="email"
             value={inputValues.email}
             onChange={changeHandler}
-            className="border"
+            className="w-full border border-primary_dark_blue focus:bg-transparent rounded focus:outline-none  bg-transparent py-2 px-4"
           />
         </div>
-        <button className="bg-red-500" type="submit">
+        <button
+          className="flex justify-center items-center p-2 rounded bg-primary_dark_blue text-primary_light_gray w-full mt-10"
+          type="submit"
+        >
           pay
         </button>
       </form>
