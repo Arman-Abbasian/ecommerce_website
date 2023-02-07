@@ -13,43 +13,42 @@ const Checkout = () => {
     }
   }, []);
   function totalPrice() {
-    if(user){
-    return card.reduce(
-      (acc, curr) => acc + curr.quantity * curr.reducedPrice,
-      0
-    );
-  }
+    if (user) {
+      return card.reduce(
+        (acc, curr) => acc + curr.quantity * curr.reducedPrice,
+        0
+      );
+    }
   }
   return (
-    <div>
-      <div className="overflow-hidden">
-        <table className="min-w-full text-center">
-          <thead className="border-b bg-gray-800">
-            <tr>
+      <div className="container mx-auto max-w-lg">
+        <table className="min-w-full text-center rounded mb-8 overflow-hidden">
+          <thead className="border-b bg-primary_dark_blue rounded text-primary_light_gray text-sm font-medium">
+            <tr className="rounded">
               <th
                 scope="col"
-                className="text-sm font-medium text-white px-6 py-4"
+                className="px-2 py-1"
               >
                 product
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium text-white px-6 py-4"
+                className="px-6 py-4"
               >
                 number
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium text-white px-6 py-4"
+                className="px-6 py-4"
               >
                 cost
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-primary_light_gray">
             {card &&
               card.map((item) => (
-                <tr key={item.id} className="bg-white border-b">
+                <tr key={item.id}>
                   <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                     {item.name}
                   </td>
@@ -57,16 +56,16 @@ const Checkout = () => {
                     {item.quantity}
                   </td>
                   <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                    {item.quantity * item.reducedPrice}
+                    {item.quantity * item.reducedPrice} $
                   </td>
                 </tr>
               ))}
-            <p>total: {totalPrice()}</p>
           </tbody>
         </table>
-        <button><Link to={'/Pay'}>pay</Link></button>
+        <p className="mb-4">total: {totalPrice()}</p>
+          <Link to={"/Pay"} className="bg-primary_dark_blue px-6 py-2 flex justify-center items-center rounded text-primary_light_gray">pay</Link>
       </div>
-    </div>
+
   );
 };
 
