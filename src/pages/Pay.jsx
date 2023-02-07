@@ -1,10 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useCard, useCardActions } from "../Providers/CardProvider";
 import { useUser } from "../Providers/UserProvider";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import axios from "axios";
 import http from "../services/httpService";
 
 const Pay = () => {
@@ -35,15 +34,23 @@ const Pay = () => {
       navigate("/Login");
     }
   }, []);
-  const cardNumberchangeHandler = (e) => {
-    if (
-      e.target.value.length === 4 ||
-      e.target.value.length === 9 ||
-      e.target.value.length === 14
+  const cardNumber = () => {
+    let characters = inputValues.cardNumber;
+    const charactersToArray = characters.split("");
+    if (charactersToArray.length >= 4 && charactersToArray.length < 8) {
+      charactersToArray.splice(4, 0, "-");
+    } else if (
+      charactersToArray.length >= 8 &&
+      charactersToArray.length < 12
     ) {
-      e.target.value += "-";
+      charactersToArray.splice(4, 0, "-");
+      charactersToArray.splice(9, 0, "-");
+    } else if (characters.length >= 12) {
+      charactersToArray.splice(4, 0, "-");
+      charactersToArray.splice(9, 0, "-");
+      charactersToArray.splice(14, 0, "-");
     }
-    setInputValues({ ...inputValues, cardNumber: e.target.value });
+    return charactersToArray.join("");
   };
   const changeHandler = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
@@ -68,16 +75,27 @@ const Pay = () => {
     }
   };
   return (
-    <div className="flex flex-col gap-3 container mx-auto max-w-md p-2">
-      <p>total price : {totalPrice()}</p>
+    <div className="flex flex-col gap-3 container mx-auto max-w-md p-2 relative">
+      <div class="aspect-w-8 aspect-h-5">
+        <img
+          src="/images/card.png"
+          alt="credit card"
+          className="w-full h-full object-center object-contain"
+        />
+        <p className="absolute top-36 left-28">{cardNumber()}</p>
+        <p className="absolute top-[166px] left-28 text-sm">{inputValues.ccv2}</p>
+        <p className="absolute top-[184px] left-28 text-sm">expire date</p>
+        <p className="absolute top-[184px] left-48 text-sm">{inputValues.month ||"00"} / {inputValues.year || "00"}</p>
+      </div>
+      <p>total price : {totalPrice()} $</p>
       <form onSubmit={submitHandler}>
         <div className="w-full mb-4">
           <label className="mb-2 block">card number</label>
           <input
             name="cardNumber"
-            onChange={cardNumberchangeHandler}
-            maxLength="19"
-            minLength="19"
+            onChange={changeHandler}
+            maxLength="16"
+            minLength="16"
             value={inputValues.cardNumber}
             className="w-full border border-primary_dark_blue focus:bg-transparent rounded focus:outline-none  bg-transparent py-2 px-4"
           />
