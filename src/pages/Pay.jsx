@@ -5,12 +5,14 @@ import { useUser } from "../Providers/UserProvider";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import http from "../services/httpService";
+var randomNumber = require("random-number");
 
 const Pay = () => {
   const user = useUser();
   const card = useCard();
   const { initialLoading } = useCardActions();
   const navigate = useNavigate();
+  const [securityCode,setSecurityCode]=useState(null)
   const [inputValues, setInputValues] = useState({
     cardNumber: "",
     ccv2: "",
@@ -20,6 +22,11 @@ const Pay = () => {
     code: "",
     email: "",
   });
+  var options = {
+    min: 100000,
+    max: 1000000,
+    integer: true,
+  };
   function totalPrice() {
     if (user) {
       return card.reduce(
@@ -30,6 +37,7 @@ const Pay = () => {
   }
 
   useEffect(() => {
+    setSecurityCode (randomNumber(options));
     if (!user) {
       navigate("/Login");
     }
@@ -39,10 +47,7 @@ const Pay = () => {
     const charactersToArray = characters.split("");
     if (charactersToArray.length >= 4 && charactersToArray.length < 8) {
       charactersToArray.splice(4, 0, "-");
-    } else if (
-      charactersToArray.length >= 8 &&
-      charactersToArray.length < 12
-    ) {
+    } else if (charactersToArray.length >= 8 && charactersToArray.length < 12) {
       charactersToArray.splice(4, 0, "-");
       charactersToArray.splice(9, 0, "-");
     } else if (characters.length >= 12) {
@@ -58,10 +63,12 @@ const Pay = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (inputValues.cardNumber.length < 19) {
+    if (inputValues.cardNumber.length < 16) {
       toast.error("card number must be 16 character");
     } else if (inputValues.month.length != 2 || inputValues.year.length != 2) {
       toast.error("month und year must be 2 character");
+    } else if (inputValues.securityCode !== securityCode.toString()) {
+      toast.error("security code is wrong");
     } else {
       http
         .post("/sales", { card, user: user.id, date: Date() })
@@ -82,10 +89,14 @@ const Pay = () => {
           alt="credit card"
           className="w-full h-full object-center object-contain"
         />
-        <p className="absolute top-36 left-28">{cardNumber()}</p>
-        <p className="absolute top-[166px] left-28 text-sm">{inputValues.ccv2}</p>
+        <p className="absolute top-36 left-28 font-bold">{cardNumber()}</p>
+        <p className="absolute top-[166px] left-28 text-sm">
+          {inputValues.ccv2}
+        </p>
         <p className="absolute top-[184px] left-28 text-sm">expire date</p>
-        <p className="absolute top-[184px] left-48 text-sm">{inputValues.month ||"00"} / {inputValues.year || "00"}</p>
+        <p className="absolute top-[184px] left-52 text-sm">
+          {inputValues.month || "00"}/{inputValues.year || "00"}
+        </p>
       </div>
       <p>total price : {totalPrice()} $</p>
       <form onSubmit={submitHandler}>
@@ -148,9 +159,10 @@ const Pay = () => {
               className="w-full border border-primary_dark_blue focus:bg-transparent rounded focus:outline-none  bg-transparent py-2 px-4"
             />
           </div>
+          {securityCode && 
           <div className="flex-1 self-end flex justify-center items-center bg-primary_dark_blue text-primary_light_gray py-3 rounded h-full">
-            <p>12345643</p>
-          </div>
+          <p>{securityCode}</p>
+        </div>}
         </div>
         <div className="w-full mb-4">
           <label className="mb-2 block">code</label>
