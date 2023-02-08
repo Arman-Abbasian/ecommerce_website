@@ -13,7 +13,6 @@ const Product = ({
   addToCart,
 }) => {
   const card = useCard();
-  console.log(card);
   function findId(item) {
     if (card) {
       return card.findIndex((element) => element.id === item);
@@ -25,11 +24,11 @@ const Product = ({
   return (
     <div key={id} className="w-64 shadow-lg shadow-primary_dark_blue rounded">
       <Link to={`/ProductDetail/${id}`}>
-        <div class="aspect-w-1 aspect-h-1">
+        <div className="aspect-w-1 aspect-h-1">
           <img
             src={image}
             alt={imgAlt}
-            class="w-full h-full object-center object-contain lg:w-full lg:h-full"
+            classname="w-full h-full object-center object-contain lg:w-full lg:h-full"
           />
         </div>
       </Link>
