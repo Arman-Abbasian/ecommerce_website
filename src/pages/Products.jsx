@@ -5,6 +5,8 @@ import Product from "../components/Product";
 import { useCardActions } from "../Providers/CardProvider";
 import http from "../services/httpService";
 import Layout from "../Layout/Layout";
+import Select from "react-select";
+import makeAnimated from 'react-select/animated';
 
 const Products = () => {
   const [products, setProducts] = useState({
@@ -12,7 +14,13 @@ const Products = () => {
     error: null,
     loading: false,
   });
+  const [selectedOption, setSelectedOption] = useState(null);
   const { addToCart } = useCardActions();
+  const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
   useEffect(() => {
     setProducts({
       data: null,
@@ -38,12 +46,28 @@ const Products = () => {
       });
   }, []);
 
+  const animatedComponents = makeAnimated();
   if (products.loading) return <p>loading</p>;
   if (products.data && products.data.length === 0)
     return <p>no products yet</p>;
   if (products.data && products.data.length > 0) {
     return (
       <Layout>
+        <div className="flex items-center gap-2 mb-2">
+        <Select
+        defaultValue={selectedOption}
+        onChange={setSelectedOption}
+        options={options}
+        className="flex-1"
+      />
+      <Select
+      closeMenuOnSelect={true}
+      components={animatedComponents}
+      isMulti
+      options={options}
+      className="flex-1"
+    />
+        </div>
         <div className="flex flex-wrap justify-center items-center gap-6 container mx-auto max-w-5xl">
           {products.data.map((item) => {
             return (
