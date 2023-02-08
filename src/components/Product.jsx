@@ -28,7 +28,7 @@ const Product = ({
           <img
             src={image}
             alt={imgAlt}
-            classname="w-full h-full object-center object-contain lg:w-full lg:h-full"
+            className="w-full h-full object-center object-contain lg:w-full lg:h-full"
           />
         </div>
       </Link>

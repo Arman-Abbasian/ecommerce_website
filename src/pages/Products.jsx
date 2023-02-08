@@ -15,7 +15,7 @@ const Products = () => {
     loading: false,
   });
   const [selectedOption, setSelectedOption] = useState(null);
-  const [filters, setFilters] = useState({ product: "", cars: [] });
+  const [filters, setFilters] = useState({ product: "", cars: [], sort: "" });
   const [showedProducts, setShowedProducts] = useState(null);
   const [productoptions, setProductOptions] = useState(null);
   const [carOptions, setCarOptions] = useState(null);
@@ -27,13 +27,11 @@ const Products = () => {
     if (products.data) {
       let product = products.data;
       if (filters.product === "") {
-        console.log(product);
         product = product;
       } else {
         product = product.filter((item) => item.name === filters.product);
       }
       if (filters.cars == "") {
-        console.log(product);
         product = product;
       } else {
         const cars = filters.cars.map((item) => item.value);
@@ -98,11 +96,22 @@ const Products = () => {
     }
   }, [products.data]);
 
+  const sortOptions = [
+    { id: 1, value: "latest", label: "latest" },
+    { id: 2, value: "earliest", label: "earliest" },
+    { id: 3, value: "expensive", label: "expensive" },
+    { id: 4, value: "cheap", label: "cheap" },
+    { id: 5, value: "mostDiscount", label: "most discount" },
+  ];
+
   const changeProductsInput = (value) => {
     setFilters({ ...filters, product: value.value });
   };
   const changeCarsInput = (value) => {
     setFilters({ ...filters, cars: value });
+  };
+  const changeSortInput = (value) => {
+    console.log(value);
   };
 
   const animatedComponents = makeAnimated();
@@ -116,10 +125,17 @@ const Products = () => {
         <div className="flex flex-col lg:flex-row  items-center gap-2 mb-2 container mx-auto max-w-sm lg:max-w-xl">
           {productoptions && (
             <Select
-              defaultValue={selectedOption}
               onChange={changeProductsInput}
               placeholder="search product name ..."
               options={productoptions}
+              className="w-full"
+            />
+          )}
+          {sortOptions && (
+            <Select
+              onChange={changeSortInput}
+              placeholder="select sort option ..."
+              options={sortOptions}
               className="w-full"
             />
           )}
@@ -136,21 +152,22 @@ const Products = () => {
           )}
         </div>
         <div className="flex flex-wrap justify-center items-center gap-6 container mx-auto max-w-5xl">
-          {showedProducts && showedProducts.map((item) => {
-            return (
-              <Product
-                key={item.id}
-                id={item.id}
-                image={item.image}
-                imgAlt={item.imgAlt}
-                productName={item.name}
-                score={item.score}
-                price={item.price}
-                discount={item.discount}
-                addToCart={() => addToCart(item)}
-              />
-            );
-          })}
+          {showedProducts &&
+            showedProducts.map((item) => {
+              return (
+                <Product
+                  key={item.id}
+                  id={item.id}
+                  image={item.image}
+                  imgAlt={item.imgAlt}
+                  productName={item.name}
+                  score={item.score}
+                  price={item.price}
+                  discount={item.discount}
+                  addToCart={() => addToCart(item)}
+                />
+              );
+            })}
         </div>
       </Layout>
     );
