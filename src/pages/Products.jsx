@@ -15,7 +15,11 @@ const Products = () => {
     loading: false,
   });
   const [selectedOption, setSelectedOption] = useState(null);
-  const [filters, setFilters] = useState({ product: "", cars: [], sort: "" });
+  const [filters, setFilters] = useState({
+    product: "",
+    cars: [],
+    sort: "latest",
+  });
   const [showedProducts, setShowedProducts] = useState(null);
   const [productoptions, setProductOptions] = useState(null);
   const [carOptions, setCarOptions] = useState(null);
@@ -37,9 +41,11 @@ const Products = () => {
         const cars = filters.cars.map((item) => item.value);
         product = product.filter((item) => cars.includes(item.car));
       }
+      sortFilter(product);
       setShowedProducts(product);
     }
   }, [products, filters]);
+  //fill the products state in intial loading the page
   useEffect(() => {
     setProducts({
       data: null,
@@ -96,6 +102,24 @@ const Products = () => {
     }
   }, [products.data]);
 
+  const sortFilter = (product) => {
+    if (filters.sort === "latest") {
+      return product.sort(function (a, b) {
+        return new Date(a.date) - new Date(b.date);
+      });
+    } else if (filters.sort === "earliest") {
+      return product.sort(function (a, b) {
+        return new Date(b.date) - new Date(a.date);
+      });
+    } else if (filters.sort === "expensive") {
+      return product;
+    } else if (filters.sort === "cheap") {
+      return product;
+    } else if (filters.sort === "mostDiscount") {
+      return product;
+    }
+  };
+
   const sortOptions = [
     { id: 1, value: "latest", label: "latest" },
     { id: 2, value: "earliest", label: "earliest" },
@@ -111,7 +135,7 @@ const Products = () => {
     setFilters({ ...filters, cars: value });
   };
   const changeSortInput = (value) => {
-    console.log(value);
+    setFilters({ ...filters, sort: value.value });
   };
 
   const animatedComponents = makeAnimated();
