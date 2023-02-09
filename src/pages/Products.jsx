@@ -7,6 +7,8 @@ import http from "../services/httpService";
 import Layout from "../Layout/Layout";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import Slider from '@mui/material/Slider';
+import axios from "axios";
 
 const Products = () => {
   const [products, setProducts] = useState({
@@ -19,13 +21,22 @@ const Products = () => {
     product: "",
     cars: [],
     sort: "latest",
+    cost:[0,0]
   });
   const [showedProducts, setShowedProducts] = useState(null);
   const [productoptions, setProductOptions] = useState(null);
   const [carOptions, setCarOptions] = useState(null);
+  const [minMaxValue,setMinmaxValue]=useState([1000,4000])
 
   const { addToCart } = useCardActions();
-
+//set MinMaxValue
+useEffect(()=>{
+  if(products.data){
+   const max= Math.max.apply(Math, products.data.map(function(o) { return o.price; }));
+   const min= Math.min.apply(Math, products.data.map(function(o) { return o.price; }))
+   setMinmaxValue([min,max])
+  }
+},[products.data])
   //filter the products.data state und update the showedProducts state
   useEffect(() => {
     if (products.data) {
@@ -137,7 +148,12 @@ const Products = () => {
   const changeSortInput = (value) => {
     setFilters({ ...filters, sort: value.value });
   };
-
+  const valuetext=(value)=> {
+    return `${value} $`;
+  };
+  const handleChange=(e)=>{
+    setFilters({...filters,cost:e.target.value})
+  }
   const animatedComponents = makeAnimated();
 
   if (products.loading) return <p>loading</p>;
@@ -174,6 +190,15 @@ const Products = () => {
               className="w-full bg-transparent"
             />
           )}
+          <Slider
+                  value={filters.cost}
+                  onChange={handleChange}
+                  valueLabelDisplay="auto"
+                  getAriaValueText={valuetext}
+                  min={minMaxValue[0]}
+                  max={minMaxValue[1]}
+                  name="costRange"
+                />
         </div>
         <div className="flex flex-wrap justify-center items-center gap-6 container mx-auto max-w-5xl">
           {showedProducts &&
