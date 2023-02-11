@@ -3,13 +3,11 @@ import makeAnimated from "react-select/animated";
 import Slider from "@mui/material/Slider";
 import { useEffect, useState } from "react";
 
-const FilterProducts = ({ products, filters, setFilters }) => {
+const FilterProducts = ({ products, filters, setFilters,minMaxValue }) => {
   //porducts option in filter section
   const [productoptions, setProductOptions] = useState(null);
   //cars option in filter section
   const [carOptions, setCarOptions] = useState(null);
-  //max and min product's cost in filter section
-  const [minMaxValue, setMinmaxValue] = useState([1000, 4000]);
   //sort options for sort filter
   const sortOptions = [
     { id: 1, value: "latest", label: "latest" },
@@ -18,24 +16,6 @@ const FilterProducts = ({ products, filters, setFilters }) => {
     { id: 4, value: "cheap", label: "cheapest" },
     { id: 5, value: "mostDiscount", label: "most discount" },
   ];
-  //set MinMaxValue
-  useEffect(() => {
-    if (products.data) {
-      const max = Math.max.apply(
-        Math,
-        products.data.map(function (o) {
-          return o.price;
-        })
-      );
-      const min = Math.min.apply(
-        Math,
-        products.data.map(function (o) {
-          return o.price;
-        })
-      );
-      setMinmaxValue([min, max]);
-    }
-  }, [products.data]);
 
   //make unique product name for productoptions state
   useEffect(() => {
@@ -86,7 +66,7 @@ const FilterProducts = ({ products, filters, setFilters }) => {
   };
   const animatedComponents = makeAnimated();
   return (
-    <div className="flex flex-col lg:flex-row  items-center gap-2 mb-2 container mx-auto max-w-sm lg:max-w-xl">
+    <div className="grid  lg:grid-cols-2  items-center gap-4 mb-2 container mx-auto max-w-sm lg:max-w-xl">
       {productoptions && (
         <Select
           onChange={changeProductsInput}
@@ -121,7 +101,7 @@ const FilterProducts = ({ products, filters, setFilters }) => {
         getAriaValueText={valuetext}
         min={minMaxValue[0]}
         max={minMaxValue[1]}
-        name="costRange"
+        aria-label="Restricted values"
       />
     </div>
   );

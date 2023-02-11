@@ -6,6 +6,7 @@ import { useCardActions } from "../Providers/CardProvider";
 import http from "../services/httpService";
 import Layout from "../Layout/Layout";
 import FilterProducts from "../components/FilterProducts";
+import { filter } from "lodash";
 
 const Products = () => {
   const [products, setProducts] = useState({
@@ -20,32 +21,69 @@ const Products = () => {
     cost: [0, 0],
   });
   const [showedProducts, setShowedProducts] = useState(null);
+  //max and min product's cost in filter section
+  const [minMaxValue, setMinmaxValue] = useState([1000, 4000]);
   const { addToCart } = useCardActions();
+
+  //set MinMaxValue
+  useEffect(() => {
+    if (products.data) {
+      const max = Math.max.apply(
+        Math,
+        products.data.map(function (o) {
+          return o.price;
+        })
+      );
+      const min = Math.min.apply(
+        Math,
+        products.data.map(function (o) {
+          return o.price;
+        })
+      );
+      setMinmaxValue([min, max]);
+      setFilters({...filters,cost:[min,max]})
+    }
+  }, [products.data]);
+
+  //implement product filter
+  const productFilter = (product) => {
+    if (filters.product === "") {
+      return product;
+    } else {
+      return product.filter((item) => item.name === filters.product);
+    }
+  };
+  //implement  car filter
+  const carFilter = (product) => {
+    if (filters.cars == "") {
+      return product;
+    } else {
+      const cars = filters.cars.map((item) => item.value);
+      return product.filter((item) => cars.includes(item.car));
+    }
+  };
   //implement  sort filter
   const sortFilter = (product) => {
     if (filters.sort === "latest") {
-      return product.sort(function (a, b) {
-        return new Date(a.date) - new Date(b.date);
-      });
+      product.sort((a, b) => new Date(b.date) - new Date(a.date));
     } else if (filters.sort === "earliest") {
-      return product.sort(function (a, b) {
-        return new Date(b.date) - new Date(a.date);
-      });
+      product.sort((a, b) => new Date(a.date) - new Date(b.date));
     } else if (filters.sort === "expensive") {
-      return product.sort((a, b) => a.price - b.price);
+      product.sort((a, b) => b.price - a.price);
     } else if (filters.sort === "cheap") {
-      return product.sort((a, b) => b.price - a.price);
+      product.sort((a, b) => a.price - b.price);
     } else if (filters.sort === "mostDiscount") {
-      return product.sort((a, b) => b.discount - a.discount);
+      product.sort((a, b) => b.discount - a.discount);
     }
+    return product;
   };
   //implement price filter
   const priceFilter = (product) => {
     if (filters.cost[1] === 0) {
-      product.filter((item) => item.cost >= filters.cost[0]);
+      return product.filter((item) => item.price >= filters.cost[0]);
     } else {
-      product.filter(
-        (item) => item.cost >= filters.cost[0] && item.cost <= filters.cost[1]
+     return product.filter(
+        (item) => item.price >= filters.cost[0] && item.price <= filters.cost[1]
       );
     }
   };
@@ -54,19 +92,14 @@ const Products = () => {
   useEffect(() => {
     if (products.data) {
       let product = products.data;
-      if (filters.product === "") {
-        product = product;
-      } else {
-        product = product.filter((item) => item.name === filters.product);
-      }
-      if (filters.cars == "") {
-        product = product;
-      } else {
-        const cars = filters.cars.map((item) => item.value);
-        product = product.filter((item) => cars.includes(item.car));
-      }
-      sortFilter(product);
-      priceFilter(product)
+      console.log(filters.sort);
+      product = productFilter(product);
+      console.log(product);
+      product = carFilter(product);
+      console.log(product);
+      product = sortFilter(product);
+      product = priceFilter(product);
+      console.log(product);
       setShowedProducts(product);
     }
   }, [products, filters]);
@@ -97,15 +130,22 @@ const Products = () => {
   }, []);
 
   if (products.loading) return <p>loading</p>;
-  if (products.data && products.data.length === 0)
-    return <p>no products yet</p>;
-  if (products.data && products.data.length > 0) {
+  if (showedProducts && showedProducts.length === 0)
+    return (
+      <Layout>
+        <p className="flex flex-wrap justify-center items-center gap-6 container mx-auto max-w-5xl">
+          no products
+        </p>
+      </Layout>
+    );
+  if (showedProducts && showedProducts.length > 0) {
     return (
       <Layout>
         <FilterProducts
           products={products}
           filters={filters}
           setFilters={setFilters}
+          minMaxValue={minMaxValue}
         />
         <div className="flex flex-wrap justify-center items-center gap-6 container mx-auto max-w-5xl">
           {showedProducts &&
