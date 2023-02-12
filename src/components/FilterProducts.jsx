@@ -3,7 +3,7 @@ import makeAnimated from "react-select/animated";
 import Slider from "@mui/material/Slider";
 import { useEffect, useState } from "react";
 
-const FilterProducts = ({ products, filters, setFilters,minMaxValue }) => {
+const FilterProducts = ({ products, filters, setFilters, minMaxValue }) => {
   //porducts option in filter section
   const [productoptions, setProductOptions] = useState(null);
   //cars option in filter section
@@ -47,7 +47,6 @@ const FilterProducts = ({ products, filters, setFilters,minMaxValue }) => {
       setCarOptions(caroptions);
     }
   }, [products.data]);
- 
 
   const changeProductsInput = (value) => {
     setFilters({ ...filters, product: value.value });
@@ -72,7 +71,14 @@ const FilterProducts = ({ products, filters, setFilters,minMaxValue }) => {
           onChange={changeProductsInput}
           placeholder="search product name ..."
           options={productoptions}
-          className="w-full"
+          className="w-full text-primary_dark_blue"
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              backgroundColor: "#425664",
+              color: 'red',
+            }),
+          }}
         />
       )}
       {sortOptions && (
@@ -80,7 +86,7 @@ const FilterProducts = ({ products, filters, setFilters,minMaxValue }) => {
           onChange={changeSortInput}
           placeholder="select sort option ..."
           options={sortOptions}
-          className="w-full"
+          className="w-full text-primary_dark_blue"
         />
       )}
       {carOptions && (
@@ -91,7 +97,7 @@ const FilterProducts = ({ products, filters, setFilters,minMaxValue }) => {
           isMulti
           placeholder="select car name ..."
           options={carOptions}
-          className="w-full bg-transparent"
+          className="w-full text-primary_dark_blue"
         />
       )}
       <Slider
@@ -102,6 +108,7 @@ const FilterProducts = ({ products, filters, setFilters,minMaxValue }) => {
         min={minMaxValue[0]}
         max={minMaxValue[1]}
         aria-label="Restricted values"
+        className="text-primary_dark_blue"
       />
     </div>
   );

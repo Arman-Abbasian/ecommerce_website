@@ -5,6 +5,8 @@ import { useCard, useCardActions } from "../Providers/CardProvider";
 import http from "../services/httpService";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { MdProductionQuantityLimits,MdDirectionsCar,MdAttachMoney } from "react-icons/md";
+import { CiDiscount1 } from "react-icons/ci";
 
 // Import Swiper styles
 import "swiper/css";
@@ -94,55 +96,69 @@ const ProductDetail = () => {
             </SwiperSlide>
           </Swiper>
         </div>
-            {/* image section in tablet section */}
-            <div className="sm:flex flex-col gap-2 hidden">
-              <div>
-              <div class="aspect-w-5 aspect-h-2 md:aspect-w-6 lg:aspect-w-7 xl:aspect-w-8">
-                <img
-                  src={selectedItem.data.image}
-                  alt={selectedItem.data.name}
-                  class="w-full h-full object-center object-contain"
-                />
-              </div>
-              </div>
-              <div className="flex items-center gap-4 container mx-auto max-w-4xl">
-              <div class="aspect-w-4 md:aspect-w-5 lg:aspect-w-6 xl:aspect-w-7 aspect-h-1 flex-1 bg-primary_dark_blue rounded">
-                <img
-                  src={selectedItem.data.image}
-                  alt={selectedItem.data.name}
-                  class="w-full h-full object-center object-contain p-1"
-                />
-              </div>
-              <div class="aspect-w-4 md:aspect-w-5 lg:aspect-w-6 xl:aspect-w-7 aspect-h-1 flex-1 bg-primary_dark_blue rounded">
-                <img
-                  src={selectedItem.data.image}
-                  alt={selectedItem.data.name}
-                  class="w-full h-full object-center object-contain p-1"
-                />
-              </div>
-              <div class="aspect-w-4 md:aspect-w-5 lg:aspect-w-6 xl:aspect-w-7 aspect-h-1 flex-1 bg-primary_dark_blue rounded">
-                <img
-                  src={selectedItem.data.image}
-                  alt={selectedItem.data.name}
-                  class="w-full h-full object-center object-contain p-1"
-                />
-              </div>
-              </div>
+        {/* image section in tablet section */}
+        <div className="sm:flex flex-col gap-2 hidden">
+          <div>
+            <div class="aspect-w-5 aspect-h-2 md:aspect-w-6 lg:aspect-w-7 xl:aspect-w-8">
+              <img
+                src={selectedItem.data.image}
+                alt={selectedItem.data.name}
+                class="w-full h-full object-center object-contain"
+              />
             </div>
+          </div>
+          <div className="flex items-center gap-4 container mx-auto max-w-4xl">
+            <div class="aspect-w-4 md:aspect-w-5 lg:aspect-w-6 xl:aspect-w-7 aspect-h-1 flex-1 bg-primary_dark_blue rounded">
+              <img
+                src={selectedItem.data.image}
+                alt={selectedItem.data.name}
+                class="w-full h-full object-center object-contain p-1"
+              />
+            </div>
+            <div class="aspect-w-4 md:aspect-w-5 lg:aspect-w-6 xl:aspect-w-7 aspect-h-1 flex-1 bg-primary_dark_blue rounded">
+              <img
+                src={selectedItem.data.image}
+                alt={selectedItem.data.name}
+                class="w-full h-full object-center object-contain p-1"
+              />
+            </div>
+            <div class="aspect-w-4 md:aspect-w-5 lg:aspect-w-6 xl:aspect-w-7 aspect-h-1 flex-1 bg-primary_dark_blue rounded">
+              <img
+                src={selectedItem.data.image}
+                alt={selectedItem.data.name}
+                class="w-full h-full object-center object-contain p-1"
+              />
+            </div>
+          </div>
+        </div>
         {/* product detail */}
-        <div>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-1">
+          <MdProductionQuantityLimits className="text-primary_light_gray w-6 h-6 rounded-full bg-primary_dark_blue p-1" />
           <p>{selectedItem.data.name}</p>
+          </div>
+          <div className="flex items-center gap-1">
+          <MdDirectionsCar className="text-primary_light_gray w-6 h-6 rounded-full bg-primary_dark_blue p-1" />
           <p>{selectedItem.data.car}</p>
+          </div>
+          <div className="flex items-center gap-1">
+          <MdAttachMoney className="text-primary_light_gray w-6 h-6 rounded-full bg-primary_dark_blue p-1" />
           <p>{selectedItem.data.price} $</p>
+          </div>
+          <div className="flex items-center gap-1">
+          <CiDiscount1 className="text-primary_light_gray w-6 h-6 rounded-full bg-primary_dark_blue p-1" />
           <p>{selectedItem.data.discount} %</p>
-          <p>{selectedItem.data.reducedPrice}$</p>
+          </div>
+          <div className="flex items-center gap-1">
+          <MdAttachMoney className="text-primary_light_gray w-6 h-6 rounded-full bg-primary_dark_blue p-1" />
+          <p>{selectedItem.data.reducedPrice} $</p>
+          </div>
           <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. In modi
             enim corporis soluta eius maiores similique ipsam doloremque fugiat,
             fuga, voluptates quae excepturi repudiandae velit amet perferendis
             dolores maxime cupiditate.
           </p>
-          <div className="flex gap-2"></div>
           <button
             disabled={findId(selectedItemId) >= 0 ? true : false}
             className={`p-2 rounded bg-gray-600 ${
