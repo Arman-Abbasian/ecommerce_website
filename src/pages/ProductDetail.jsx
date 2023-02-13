@@ -19,6 +19,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { EffectCoverflow, Pagination } from "swiper";
+import Header from "../Layout/Header";
 
 const ProductDetail = () => {
   const card = useCard();
@@ -53,6 +54,7 @@ const ProductDetail = () => {
   if (selectedItem.data && card) {
     return (
       <div className="flex flex-col container mx-auto max-w-4xl">
+        <Header />
         {/* image section in mobile section */}
         <div className="sm:hidden mb-10">
           <Swiper

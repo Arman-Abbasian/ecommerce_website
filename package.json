@@ -15,6 +15,7 @@
     "closest": "^0.0.1",
     "dagre": "^0.8.5",
     "formik": "^2.2.9",
+    "framer-motion": "^9.0.2",
     "json-server": "^0.17.1",
     "lodash": "^4.17.21",
     "pathfinding": "^0.4.18",
