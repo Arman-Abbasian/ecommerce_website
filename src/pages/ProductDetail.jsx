@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useCard, useCardActions } from "../Providers/CardProvider";
 import http from "../services/httpService";
 // Import Swiper React components
@@ -20,10 +20,14 @@ import "swiper/css/pagination";
 // import required modules
 import { EffectCoverflow, Pagination } from "swiper";
 import Header from "../Layout/Header";
+import { useUser } from "../Providers/UserProvider";
 
 const ProductDetail = () => {
   const card = useCard();
-  console.log(card);
+  const user=useUser();
+  console.log(user)
+  const [textAreaInput, setTextAreaInput] = useState("");
+  const [comments,setComments]=useState(null);
   const selectedItemId = useParams().id;
   const { addToCart, initialLoading } = useCardActions();
   const [selectedItem, setSelectedItem] = useState({
@@ -31,6 +35,7 @@ const ProductDetail = () => {
     error: null,
     loading: false,
   });
+
   useEffect(() => {
     setSelectedItem({ data: null, error: null, loading: true });
     http
@@ -45,8 +50,32 @@ const ProductDetail = () => {
   }, []);
   useEffect(() => {
     initialLoading();
+    http.get(`/comments?productId=${selectedItemId}`)
+        .then(res=>{
+          setComments(res.data)
+      }).catch(err=>toast.error(err.message))
   }, []);
-
+  //manage the input text in text area
+  const chaneHandlerTextArea = (e) => {
+    setTextAreaInput(e.target.value);
+  };
+  //add the comment to comment section
+  const addComment=(e)=>{
+    e.preventDefault();
+    if(!user){
+      toast.error('please login at first')
+    }else{
+      http.post('/comments',{personId:user.id,comment:textAreaInput,productId:selectedItemId})
+      .then(res=>{
+        toast.success('comment added successfully')
+        setTextAreaInput("")
+        http.get(`/comment?productId=${selectedItemId}`)
+        .then(res=>{
+          setComments(res.data)
+        })
+      }).catch(err=>toast.error(err.message))
+    }
+  }
   function findId(item) {
     return card.findIndex((element) => element.id.toString() === item);
   }
@@ -181,9 +210,28 @@ const ProductDetail = () => {
           </button>
         </div>
         {/* comment section */}
+        {/* product comments */}
         <div>
-            <textarea placeholder="add your comment..." className="w-full bg-transparent border border-primary_dark_blue rounded px-2 py-1 focus:outline-none"></textarea>
-            <button className="bg-primary_dark_blue rounded p-2">Add comment</button>
+          {comments && 
+            comments.map(item=>{
+              return <div>
+                <p>name</p>
+                <p>comment</p>
+              </div>
+            })
+          }
+        </div>
+        {/* add comment section */}
+        <div>
+          <form onSubmit={addComment}>
+            <textarea
+              value={textAreaInput}
+              onChange={chaneHandlerTextArea}
+              placeholder="add your comment..."
+              className="w-full bg-transparent border border-primary_dark_blue rounded px-2 py-1 focus:outline-none"
+            ></textarea>
+            <input type="submit" value="Add comment" className="bg-primary_dark_blue rounded p-2 cursor-pointer" />
+          </form>
         </div>
       </div>
     );
