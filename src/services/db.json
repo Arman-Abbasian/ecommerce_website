@@ -189,21 +189,24 @@
   ],
   "comments": [
     {
-      "personId": 1,
-      "comment": "comment 1",
+      "personId": 2,
+      "personUserName": "Ali",
+      "comment": "that is good",
       "productId": "5",
       "id": 1
     },
     {
-      "personId": 1,
-      "comment": "comment 1",
-      "productId": "5",
+      "personId": 3,
+      "personUserName": "mahmood",
+      "comment": "I used it but that was not good really much",
+      "productId": "3",
       "id": 2
     },
     {
       "personId": 1,
-      "comment": "comment 2",
-      "productId": "5",
+      "personUserName": "Arman",
+      "comment": "this is a very good product i usesd it and i am pleased",
+      "productId": "3",
       "id": 3
     }
   ]

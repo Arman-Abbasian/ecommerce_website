@@ -65,7 +65,7 @@ const ProductDetail = () => {
     if(!user){
       toast.error('please login at first')
     }else{
-      http.post('/comments',{personId:user.id,comment:textAreaInput,productId:selectedItemId})
+      http.post('/comments',{personId:user.id,personUserName:user.userName,comment:textAreaInput,productId:selectedItemId})
       .then(res=>{
         toast.success('comment added successfully')
         setTextAreaInput("")
@@ -209,14 +209,14 @@ const ProductDetail = () => {
             {findId(selectedItemId) >= 0 ? "Added in cart" : "Add to basket"}
           </button>
         </div>
-        {/* comment section */}
+        {/* comment section  */}
         {/* product comments */}
         <div>
           {comments && 
             comments.map(item=>{
-              return <div>
-                <p>name</p>
-                <p>comment</p>
+              return <div key={item.id} className="mb-2">
+                <p className="mb-2">{item.personUserName}</p>
+                <p className="p-2 bg-primary_light_gray rounded">{item.comment}</p>
               </div>
             })
           }
