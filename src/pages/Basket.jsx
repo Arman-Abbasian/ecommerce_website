@@ -15,6 +15,7 @@ const Basket = () => {
   if (card && card.length === 0) return <Layout><div className="text-center container mx-auto max-w-5xl text-primary_dark_blue text-2xl  text-shadow-primary">no Item in Basket</div></Layout>;
   if (card && card.length > 0) {
     return (
+      <Layout>
       <div className="flex flex-col gap-4 container mx-auto max-w-lg">
         <div className="mb-20 flex flex-col gap-2">
           {card.map((item) => (
@@ -50,6 +51,7 @@ const Basket = () => {
           </Link>
         </div>
       </div>
+      </Layout>
     );
   }
 };
