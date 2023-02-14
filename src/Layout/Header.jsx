@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { BsBasket3 } from "react-icons/bs";
 import { useCard, useCardActions } from "../Providers/CardProvider";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -11,6 +11,8 @@ const Header = () => {
   const [showHam, setShowHam] = useState(false);
   const [activeLink, setActiveLink] = useState("logo");
   const user = useUser();
+  const {pathname}=useLocation();
+  console.log(pathname)
   useEffect(() => {
     initialLoading();
   }, []);
@@ -31,7 +33,7 @@ const Header = () => {
               onClick={() => setActiveLink("logo")}
               to="/"
               className={`flex items-center md:justify-center md:px-8 h-full hover:bg-primary_light_gray p-1 rounded ${
-                activeLink === "logo" && "bg-primary_light_gray"
+                pathname === "/" && "bg-primary_light_gray"
               }`}
             >
               <img src="/images/logo.webp" alt="logo" className="w-8 h-8" />
@@ -42,7 +44,7 @@ const Header = () => {
               onClick={() => setActiveLink("login")}
               to={user ? "/Profile" : "/Login"}
               className={`flex items-center md:justify-center md:px-8 h-full hover:bg-primary_light_gray p-1 rounded ${
-                activeLink === "login" && "bg-primary_light_gray"
+                pathname === "/Login"   && "bg-primary_light_gray"
               }`}
             >
               {user ? "profile" : "Login"}
@@ -53,18 +55,18 @@ const Header = () => {
               onClick={() => setActiveLink("products")}
               to="/Products"
               className={`flex items-center md:justify-center md:px-8 h-full hover:bg-primary_light_gray p-1 rounded ${
-                activeLink === "products" && "bg-primary_light_gray"
+                pathname === "/Products"  && "bg-primary_light_gray"
               }`}
             >
               Products
             </Link>
           </li>
-          <li className="w-1/3 md:w-full relative flex items-center md:px-8 h-full hover:bg-primary_light_gray p-1 rounded">
+          <li className="w-1/3 md:w-full relative ">
             <Link
               onClick={() => setActiveLink("basket")}
               to="/Basket"
-              className={`flex items-center gap-1 md:justify-center md:px-8 h-full w-full hover:bg-primary_light_gray p-1 rounded ${
-                activeLink === "basket" && "bg-primary_light_gray"
+              className={`flex items-center md:justify-center md:px-8 h-full w-full hover:bg-primary_light_gray p-1 rounded ${
+                pathname === "/Basket" && "bg-primary_light_gray"
               }`}
             >
               <BsBasket3 className="w-6 h-6" />

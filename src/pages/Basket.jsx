@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import OneBasketItem from "../components/OneBasketItem";
+import Layout from "../Layout/Layout";
 import { useCard } from "../Providers/CardProvider";
 
 const Basket = () => {
@@ -11,7 +12,7 @@ const Basket = () => {
   function yourPrice() {
     return card.reduce((acc, cur) => acc + cur.reducedPrice * cur.quantity, 0);
   }
-  if (card && card.length === 0) return <div>no Item in Basket</div>;
+  if (card && card.length === 0) return <Layout><div className="text-center container mx-auto max-w-5xl text-primary_dark_blue text-2xl  text-shadow-primary">no Item in Basket</div></Layout>;
   if (card && card.length > 0) {
     return (
       <div className="flex flex-col gap-4 container mx-auto max-w-lg">
