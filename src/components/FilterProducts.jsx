@@ -1,10 +1,8 @@
-import Select,{} from "react-select";
+import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import Slider from "@mui/material/Slider";
 import { useEffect, useState } from "react";
-import classNames from 'classnames';
-
-
+import classNames from "classnames";
 
 const FilterProducts = ({ products, filters, setFilters, minMaxValue }) => {
   //porducts option in filter section
@@ -80,7 +78,7 @@ const FilterProducts = ({ products, filters, setFilters, minMaxValue }) => {
             control: (baseStyles, state) => ({
               ...baseStyles,
               backgroundColor: "#425664",
-              color: 'red',
+              color: "red",
             }),
           }}
         />
@@ -91,18 +89,21 @@ const FilterProducts = ({ products, filters, setFilters, minMaxValue }) => {
           placeholder="select sort option ..."
           options={sortOptions}
           classNames={{
-            control: ({ isDisabled, isFocused }) =>
+            control: ({ isFocused }) =>
               classNames(
-                !isDisabled && isFocused && 'border-purple-800',
-                isFocused && 'shadow-[0_0_0_1px] shadow-purple-800',
-                isFocused && 'hover:border-purple-800'
+                isFocused && "hover:bg-[#425664]",
+                isFocused && "hover:bg-[#425664]"
               ),
-            option: ({ isDisabled, isFocused, isSelected }) =>
+            singleValue: ({ isFocused }) =>
+              classNames(isFocused && "hover:text-white"),
+            menuList: ({ isFocused, isSelected, focusedOption }) =>
               classNames(
-                isSelected && 'bg-purple-800',
-                !isSelected && isFocused && 'bg-purple-300',
-                !isDisabled && isSelected && 'active:bg-purple-800',
-                !isDisabled && !isSelected && 'active:bg-purple-500'
+                isFocused && "bg-purple-800",
+                isSelected && "bg-red-800",
+                isFocused && "shadow-[0_0_0_1px] shadow-purple-800",
+                isFocused && "hover:bg-blue-300",
+                focusedOption && "bg-[#425664]",
+                "text-[#F6F4F2]"
               ),
           }}
           components={animatedComponents}
