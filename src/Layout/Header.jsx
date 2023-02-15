@@ -4,6 +4,7 @@ import { useCard, useCardActions } from "../Providers/CardProvider";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import { useUser } from "../Providers/UserProvider";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const card = useCard();
@@ -11,18 +12,18 @@ const Header = () => {
   const [showHam, setShowHam] = useState(false);
   const [activeLink, setActiveLink] = useState("logo");
   const user = useUser();
-  const {pathname}=useLocation();
-  console.log(pathname)
+  const { pathname } = useLocation();
+  console.log(pathname);
   useEffect(() => {
     initialLoading();
   }, []);
   return (
-    <div className="max-h-40 sticky top-4 mb-10 flex-initial z-10">
+    <motion.div className="max-h-40 sticky top-4 mb-10 flex-initial z-10" whileTap={{ scale: 1 }} transition={{ type: "spring",duration:2, stiffness: 4, damping: 1 }}>
       <RxHamburgerMenu
         onClick={() => setShowHam(!showHam)}
         className="md:hidden bg-primary_dark_blue rounded cursor-pointer w-10 h-10 p-2 text-3xl"
       />
-      <nav
+      <motion.nav whileTap={{opacity:0}} initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.5}}
         className={`h-full ${
           showHam ? "block" : "hidden"
         } md:block container mx-auto max-w-5xl mb-6 `}
@@ -44,7 +45,7 @@ const Header = () => {
               onClick={() => setActiveLink("login")}
               to={user ? "/Profile" : "/Login"}
               className={`flex items-center md:justify-center md:px-8 h-full hover:bg-primary_light_gray p-1 rounded ${
-                pathname === "/Login"   && "bg-primary_light_gray"
+                pathname === "/Login" && "bg-primary_light_gray"
               }`}
             >
               {user ? "profile" : "Login"}
@@ -55,7 +56,7 @@ const Header = () => {
               onClick={() => setActiveLink("products")}
               to="/Products"
               className={`flex items-center md:justify-center md:px-8 h-full hover:bg-primary_light_gray p-1 rounded ${
-                pathname === "/Products"  && "bg-primary_light_gray"
+                pathname === "/Products" && "bg-primary_light_gray"
               }`}
             >
               Products
@@ -76,8 +77,8 @@ const Header = () => {
             </Link>
           </li>
         </ul>
-      </nav>
-    </div>
+      </motion.nav>
+    </motion.div>
   );
 };
 

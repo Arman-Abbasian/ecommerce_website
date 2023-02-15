@@ -6,7 +6,7 @@ import { useCardActions } from "../Providers/CardProvider";
 import http from "../services/httpService";
 import Layout from "../Layout/Layout";
 import FilterProducts from "../components/FilterProducts";
-import { filter } from "lodash";
+import { motion } from "framer-motion";
 
 const Products = () => {
   const [products, setProducts] = useState({
@@ -147,7 +147,7 @@ const Products = () => {
           setFilters={setFilters}
           minMaxValue={minMaxValue}
         />
-        <div className="flex flex-wrap justify-center items-center gap-6 container mx-auto max-w-5xl">
+        <motion.div exit={{opacity:0}} transition={{duration:1}}  className="flex flex-wrap justify-center items-center gap-6 container mx-auto max-w-5xl">
           {showedProducts &&
             showedProducts.map((item) => {
               return (
@@ -164,7 +164,7 @@ const Products = () => {
                 />
               );
             })}
-        </div>
+        </motion.div>
       </Layout>
     );
   }

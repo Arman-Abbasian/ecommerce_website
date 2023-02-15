@@ -1,7 +1,10 @@
-import Select from "react-select";
+import Select,{} from "react-select";
 import makeAnimated from "react-select/animated";
 import Slider from "@mui/material/Slider";
 import { useEffect, useState } from "react";
+import classNames from 'classnames';
+
+
 
 const FilterProducts = ({ products, filters, setFilters, minMaxValue }) => {
   //porducts option in filter section
@@ -71,6 +74,7 @@ const FilterProducts = ({ products, filters, setFilters, minMaxValue }) => {
           onChange={changeProductsInput}
           placeholder="search product name ..."
           options={productoptions}
+          components={animatedComponents}
           className="w-full text-primary_dark_blue"
           styles={{
             control: (baseStyles, state) => ({
@@ -86,7 +90,22 @@ const FilterProducts = ({ products, filters, setFilters, minMaxValue }) => {
           onChange={changeSortInput}
           placeholder="select sort option ..."
           options={sortOptions}
-          className="w-full text-primary_dark_blue"
+          classNames={{
+            control: ({ isDisabled, isFocused }) =>
+              classNames(
+                !isDisabled && isFocused && 'border-purple-800',
+                isFocused && 'shadow-[0_0_0_1px] shadow-purple-800',
+                isFocused && 'hover:border-purple-800'
+              ),
+            option: ({ isDisabled, isFocused, isSelected }) =>
+              classNames(
+                isSelected && 'bg-purple-800',
+                !isSelected && isFocused && 'bg-purple-300',
+                !isDisabled && isSelected && 'active:bg-purple-800',
+                !isDisabled && !isSelected && 'active:bg-purple-500'
+              ),
+          }}
+          components={animatedComponents}
         />
       )}
       {carOptions && (

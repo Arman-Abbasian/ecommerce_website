@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import { useCard } from "../Providers/CardProvider";
+import { motion } from "framer-motion";
 
 const Product = ({
   id,
@@ -22,7 +23,14 @@ const Product = ({
   }
 
   return (
-    <div key={id} className="w-64 shadow-lg shadow-primary_dark_blue rounded">
+    <motion.div
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    transition={{duration:1}}
+    viewport={{ once: true }}
+      key={id}
+      className="w-64 shadow-lg shadow-primary_dark_blue rounded"
+    >
       <Link to={`/ProductDetail/${id}`}>
         <div className="aspect-w-1 aspect-h-1">
           <img
@@ -54,7 +62,7 @@ const Product = ({
           {findId(id) >= 0 ? "Added in Basket" : "Add to basket"}
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
