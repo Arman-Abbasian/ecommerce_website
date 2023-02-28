@@ -1,5 +1,5 @@
 import Select from "react-select";
-import makeAnimated from "react-select/animated";
+import makeAnimated, { Input } from "react-select/animated";
 import Slider from "@mui/material/Slider";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
@@ -73,12 +73,38 @@ const FilterProducts = ({ products, filters, setFilters, minMaxValue }) => {
           placeholder="search product name ..."
           options={productoptions}
           components={animatedComponents}
-          className="w-full text-primary_dark_blue"
+          className="w-full"
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
               backgroundColor: "#425664",
-              color: "red",
+              border: state.isFocused
+                ? "2px solid #1976d2"
+                : "0px solid #1976d2",
+              boxShadow: "none",
+            }),
+            input: (baseStyles, state) => {
+              return {
+                ...baseStyles,
+                color: "white",
+              };
+            },
+            option: (styles, state) => {
+              return {
+                ...styles,
+                color: "#425664",
+                ":hover": { backgroundColor: "#425664", color: "white" },
+              };
+            },
+            singleValue: (styles, state) => {
+              return {
+                ...styles,
+                color: "white",
+              };
+            },
+            placeholder: (styles, state) => ({
+              ...styles,
+              color: "white",
             }),
           }}
         />
@@ -88,23 +114,38 @@ const FilterProducts = ({ products, filters, setFilters, minMaxValue }) => {
           onChange={changeSortInput}
           placeholder="select sort option ..."
           options={sortOptions}
-          classNames={{
-            control: ({ isFocused }) =>
-              classNames(
-                isFocused && "hover:bg-[#425664]",
-                isFocused && "hover:bg-[#425664]"
-              ),
-            singleValue: ({ isFocused }) =>
-              classNames(isFocused && "hover:text-white"),
-            menuList: ({ isFocused, isSelected, focusedOption }) =>
-              classNames(
-                isFocused && "bg-purple-800",
-                isSelected && "bg-red-800",
-                isFocused && "shadow-[0_0_0_1px] shadow-purple-800",
-                isFocused && "hover:bg-blue-300",
-                focusedOption && "bg-[#425664]",
-                "text-[#F6F4F2]"
-              ),
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              backgroundColor: "#425664",
+              border: state.isFocused
+                ? "2px solid #1976d2"
+                : "0px solid #1976d2",
+              boxShadow: "none",
+            }),
+            option: (styles, data) => {
+              return {
+                ...styles,
+                color: "#425664",
+                ":hover": { backgroundColor: "#425664", color: "white" },
+              };
+            },
+            input: (baseStyles, state) => {
+              return {
+                ...baseStyles,
+                color: "white",
+              };
+            },
+            placeholder: (styles, state) => ({
+              ...styles,
+              color: "white",
+            }),
+            singleValue: (styles, state) => {
+              return {
+                ...styles,
+                color: "white",
+              };
+            },
           }}
           components={animatedComponents}
         />
@@ -118,6 +159,26 @@ const FilterProducts = ({ products, filters, setFilters, minMaxValue }) => {
           placeholder="select car name ..."
           options={carOptions}
           className="w-full text-primary_dark_blue"
+          styles={{
+            multiValue: (styles, data) => {
+              console.log(data);
+              return {
+                ...styles,
+                color: "white",
+                backgroundColor: "#425664",
+                ":hover": { backgroundColor: "white", color: "#425664" },
+              };
+            },
+            multiValueLabel: (styles, data) => {
+              console.log(data);
+              return {
+                ...styles,
+                color: "white",
+                cursor: "pointer",
+                ":hover": {  color: "#425664" },
+              };
+            },
+          }}
         />
       )}
       <Slider
