@@ -66,7 +66,7 @@ const FilterProducts = ({ products, filters, setFilters, minMaxValue }) => {
   };
   const animatedComponents = makeAnimated();
   return (
-    <div className="grid  lg:grid-cols-2  items-center gap-4 mb-2 container mx-auto max-w-sm lg:max-w-xl">
+    <div className="grid  lg:grid-cols-2  items-center gap-4 mb-12 container mx-auto max-w-sm lg:max-w-xl">
       {productoptions && (
         <Select
           onChange={changeProductsInput}
@@ -160,22 +160,55 @@ const FilterProducts = ({ products, filters, setFilters, minMaxValue }) => {
           options={carOptions}
           className="w-full text-primary_dark_blue"
           styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              backgroundColor: "#425664",
+              border: state.isFocused
+                ? "2px solid #1976d2"
+                : "0px solid #1976d2",
+              boxShadow: "none",
+            }),
+            option: (styles, data) => {
+              return {
+                ...styles,
+                color: "#425664",
+                ":hover": { backgroundColor: "#425664", color: "white" },
+              };
+            },
+            input: (baseStyles, state) => {
+              return {
+                ...baseStyles,
+                color: "white",
+              };
+            },
+            placeholder: (styles, state) => ({
+              ...styles,
+              color: "white",
+            }),
             multiValue: (styles, data) => {
               console.log(data);
               return {
                 ...styles,
-                color: "white",
-                backgroundColor: "#425664",
-                ":hover": { backgroundColor: "white", color: "#425664" },
+                color: "#425664",
+                backgroundColor: "white",
+                ":hover": { backgroundColor: "#425664", color: "white" },
               };
             },
             multiValueLabel: (styles, data) => {
               console.log(data);
               return {
                 ...styles,
-                color: "white",
+                color: "#425664",
                 cursor: "pointer",
-                ":hover": {  color: "#425664" },
+                ":hover": { color: "#425664" },
+              };
+            },
+            multiValueRemove: (styles, data) => {
+              console.log(data);
+              return {
+                ...styles,
+                cursor: "pointer",
+                ":hover": { backgroundColor: "white", color: "#425664" },
               };
             },
           }}
