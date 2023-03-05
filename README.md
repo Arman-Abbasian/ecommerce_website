@@ -1,3 +1,14 @@
+# used Packages and Technologies
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="36"  alt="HTML5" style="padding-right:10px;" align="left"  />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="36"  alt="react" style="padding-right:10px;" align="left"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png" width="36" alt="tailwind" style="padding-right:10px;" align="left" />
+<img src="https://mui.com/static/logo.png" width="36"  alt="materialui" style="padding-right:10px;" align="left" />
+<img src="https://user-images.githubusercontent.com/38039349/60953119-d3c6f300-a2fc-11e9-9596-4978e5d52180.png"  alt="motion" width="36" alt="Terminal"  style="padding-right:10px;" align="left" />
+<span width="960" style="padding-right: 10px;" align="left" >json-server</span>
+<span width="960" style="padding-right:40px;" align="left" >useContext</span>
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
