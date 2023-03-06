@@ -6,7 +6,7 @@ import { useCardActions } from "../Providers/CardProvider";
 import http from "../services/httpService";
 import Layout from "../Layout/Layout";
 import FilterProducts from "../components/FilterProducts";
-import { motion } from "framer-motion";
+import { motion, animate, initial, AnimatePresence } from "framer-motion";
 
 const Products = () => {
   const [products, setProducts] = useState({
@@ -41,7 +41,7 @@ const Products = () => {
         })
       );
       setMinmaxValue([min, max]);
-      setFilters({...filters,cost:[min,max]})
+      setFilters({ ...filters, cost: [min, max] });
     }
   }, [products.data]);
 
@@ -82,7 +82,7 @@ const Products = () => {
     if (filters.cost[1] === 0) {
       return product.filter((item) => item.price >= filters.cost[0]);
     } else {
-     return product.filter(
+      return product.filter(
         (item) => item.price >= filters.cost[0] && item.price <= filters.cost[1]
       );
     }
@@ -128,6 +128,30 @@ const Products = () => {
         toast.error(err.message);
       });
   }, []);
+  //framer-motion
+  const listVariants = {
+    initial: {
+      opacity: 0,
+      x: "-100vw",
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.4,
+        duration: 1.6,
+        when: "beforeChildren",
+      },
+    },
+    hidden: {
+      x: "100vw",
+      opacity: 0,
+      transition: {
+        duration: 10,
+      },
+    },
+  };
 
   if (products.loading) return <p>loading</p>;
   if (showedProducts && showedProducts.length === 0)
@@ -141,30 +165,43 @@ const Products = () => {
   if (showedProducts && showedProducts.length > 0) {
     return (
       <Layout>
-        <FilterProducts
-          products={products}
-          filters={filters}
-          setFilters={setFilters}
-          minMaxValue={minMaxValue}
-        />
-        <motion.div exit={{opacity:0}} transition={{duration:1}}  className="flex flex-wrap justify-center items-center gap-6 container mx-auto max-w-5xl">
-          {showedProducts &&
-            showedProducts.map((item) => {
-              return (
-                <Product
-                  key={item.id}
-                  id={item.id}
-                  image={item.image}
-                  imgAlt={item.imgAlt}
-                  productName={item.name}
-                  score={item.score}
-                  price={item.price}
-                  discount={item.discount}
-                  addToCart={() => addToCart(item)}
-                />
-              );
-            })}
-        </motion.div>
+        <AnimatePresence>
+          <motion.div
+            variants={listVariants}
+            initial="initial"
+            animate="visible"
+            exit="hidden"
+          >
+            <FilterProducts
+              products={products}
+              filters={filters}
+              setFilters={setFilters}
+              minMaxValue={minMaxValue}
+            />
+            <motion.div
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              className="flex flex-wrap justify-center items-center gap-6 container mx-auto max-w-5xl"
+            >
+              {showedProducts &&
+                showedProducts.map((item) => {
+                  return (
+                    <Product
+                      key={item.id}
+                      id={item.id}
+                      image={item.image}
+                      imgAlt={item.imgAlt}
+                      productName={item.name}
+                      score={item.score}
+                      price={item.price}
+                      discount={item.discount}
+                      addToCart={() => addToCart(item)}
+                    />
+                  );
+                })}
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
       </Layout>
     );
   }

@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useUser, useUserActions } from "../Providers/UserProvider";
 import Layout from "../Layout/Layout";
+import { motion, animate, initial, AnimatePresence } from "framer-motion";
 
 const initialValues = {
   email: "",
@@ -75,42 +76,76 @@ const Login = () => {
     validationSchema,
     validateOnMount: true,
   });
+
+  //framer-motion
+  const listVariants = {
+    initial: {
+      opacity: 0,
+      x: "-100vw",
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.4,
+        duration: 1.6,
+        when: "beforeChildren",
+      },
+    },
+    hidden: {
+      x: "100vw",
+      opacity: 0,
+      transition: {
+        duration: 10,
+      },
+    },
+  };
+
   return (
     <Layout>
-      <div className="flex flex-col gap-3 container mx-auto max-w-lg flex-auto">
-        <form onSubmit={formik.handleSubmit}>
-          <div className="flex flex-col gap-4 justify-center items-center border border-primary_dark_blue rounded p-2  shadow-[rgba(236,_243,_158,_0.4)_0px_30px_90px]">
-            <Input
-              name="email"
-              type="email"
-              label="email"
-              formik={formik}
-              logo={<IoMailOpenOutline />}
-            />
-            <Input
-              name="password"
-              type="password"
-              label="password"
-              formik={formik}
-              logo={<RiLockPasswordLine />}
-            />
-            <button
-              disabled={!formik.isValid}
-              className="py-2 px-4  rounded-sm w-full disabled:bg-opacity-60 bg-primary_dark_blue"
-              type="submit"
-            >
-              {formik.isValid ? "Enter" : "please fill all fields"}
-            </button>
-            {loginError && <p className="text-red-500">{loginError}</p>}
-            <Link
-              className="text-primary_dark_blue block w-full text-start"
-              to={"/Signup"}
-            >
-              not sign up yet?
-            </Link>
-          </div>
-        </form>
-      </div>
+      <AnimatePresence>
+        <motion.div
+          variants={listVariants}
+          initial="initial"
+          animate="visible"
+          exit="hidden"
+          className="flex flex-col gap-3 container mx-auto max-w-lg flex-auto"
+        >
+          <form onSubmit={formik.handleSubmit}>
+            <div className="flex flex-col gap-4 justify-center items-center border border-primary_dark_blue rounded p-2  shadow-[rgba(236,_243,_158,_0.4)_0px_30px_90px]">
+              <Input
+                name="email"
+                type="email"
+                label="email"
+                formik={formik}
+                logo={<IoMailOpenOutline />}
+              />
+              <Input
+                name="password"
+                type="password"
+                label="password"
+                formik={formik}
+                logo={<RiLockPasswordLine />}
+              />
+              <button
+                disabled={!formik.isValid}
+                className="py-2 px-4  rounded-sm w-full disabled:bg-opacity-60 bg-primary_dark_blue"
+                type="submit"
+              >
+                {formik.isValid ? "Enter" : "please fill all fields"}
+              </button>
+              {loginError && <p className="text-red-500">{loginError}</p>}
+              <Link
+                className="text-primary_dark_blue block w-full text-start"
+                to={"/Signup"}
+              >
+                not sign up yet?
+              </Link>
+            </div>
+          </form>
+        </motion.div>
+      </AnimatePresence>
     </Layout>
   );
 };

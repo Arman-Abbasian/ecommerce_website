@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import Layout from "../Layout/Layout";
 import { useUser } from "../Providers/UserProvider";
+import { motion, animate, initial, AnimatePresence } from "framer-motion";
 
 const Profile = () => {
   const [records, setRecords] = useState(null);
@@ -14,9 +15,36 @@ const Profile = () => {
       .then((res) => setRecords(res.data))
       .catch((err) => toast.error(err.message));
   }, []);
+  //framer-motion
+  const listVariants = {
+    initial: {
+      opacity: 0,
+      x: "-100vw",
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.4,
+        duration: 1.6,
+        when: "beforeChildren",
+      },
+    },
+    hidden: {
+      x: "100vw",
+      opacity: 0,
+      transition: {
+        duration: 10,
+      },
+    },
+  };
   return (
+    <AnimatePresence>
     <Layout>
-      <div className="container mx-auto max-w-5xl">
+      <motion.div variants={listVariants} initial="initial"
+    animate="visible"
+    exit="hidden" className="container mx-auto max-w-5xl">
         {user && (
           <div className="mb-36">
             <p>{user.userName}</p>
@@ -92,8 +120,9 @@ const Profile = () => {
               );
             })}
         </div>
-      </div>
+      </motion.div>
     </Layout>
+    </AnimatePresence>
   );
 };
 

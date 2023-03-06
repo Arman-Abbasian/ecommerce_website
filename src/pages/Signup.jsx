@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import { useEffect } from "react";
 import { useState } from "react";
+import { motion, animate, initial, AnimatePresence } from "framer-motion";
 
 const initialValues = {
   userName: "",
@@ -85,62 +86,94 @@ const Signup = () => {
     validationSchema,
     validateOnMount: true,
   });
+  //framer-motion
+  const listVariants = {
+    initial: {
+      opacity: 0,
+      x: "-100vw",
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.4,
+        duration: 1.6,
+        when: "beforeChildren",
+      },
+    },
+    hidden: {
+      x: "100vw",
+      opacity: 0,
+      transition: {
+        duration: 10,
+      },
+    },
+  };
   return (
     <Layout>
-      <div className="flex flex-col gap-3 container mx-auto max-w-lg">
-        <form onSubmit={formik.handleSubmit}>
-          <div className="flex flex-col gap-4 justify-center items-center border border-primary_dark_blue rounded p-2">
-            <Input
-              name="userName"
-              label="name"
-              formik={formik}
-              logo={<IoPersonOutline />}
-            />
-            <Input
-              name="phoneNumber"
-              type="tel"
-              label="phone number"
-              formik={formik}
-              logo={<IoPhonePortraitOutline />}
-            />
-            <Input
-              name="email"
-              type="email"
-              label="email"
-              formik={formik}
-              logo={<IoMailOpenOutline />}
-            />
-            <Input
-              name="password"
-              type="password"
-              label="password"
-              formik={formik}
-              logo={<RiLockPasswordLine />}
-            />
-            <Input
-              name="passwordConfirmation"
-              type="password"
-              label="password confirmation"
-              formik={formik}
-              logo={<RiLockPasswordLine />}
-            />
+      <AnimatePresence>
+        <motion.div
+        variants={listVariants}
+          initial="initial"
+          animate="visible"
+          exit="hidden"
+          className="flex flex-col gap-3 container mx-auto max-w-lg"
+        >
+          <form onSubmit={formik.handleSubmit}>
+            <div className="flex flex-col gap-4 justify-center items-center border border-primary_dark_blue rounded p-2">
+              <Input
+                name="userName"
+                label="name"
+                formik={formik}
+                logo={<IoPersonOutline />}
+              />
+              <Input
+                name="phoneNumber"
+                type="tel"
+                label="phone number"
+                formik={formik}
+                logo={<IoPhonePortraitOutline />}
+              />
+              <Input
+                name="email"
+                type="email"
+                label="email"
+                formik={formik}
+                logo={<IoMailOpenOutline />}
+              />
+              <Input
+                name="password"
+                type="password"
+                label="password"
+                formik={formik}
+                logo={<RiLockPasswordLine />}
+              />
+              <Input
+                name="passwordConfirmation"
+                type="password"
+                label="password confirmation"
+                formik={formik}
+                logo={<RiLockPasswordLine />}
+              />
 
-            <button
-              disabled={!formik.isValid}
-              className="py-2 px-4 rounded-sm w-full disabled:bg-opacity-60 bg-primary_dark_blue"
-              type="submit"
-            >
-              {formik.isValid ? "Add" : "please fill all fields"}
-            </button>
-            <Link
-              to={"/Login"}
-              className="text-primary_dark_blue block w-full text-start"
-            >
-              already login?
-            </Link>
-          </div>
-        </form>
-      </div>
+              <button
+                disabled={!formik.isValid}
+                className="py-2 px-4 rounded-sm w-full disabled:bg-opacity-60 bg-primary_dark_blue"
+                type="submit"
+              >
+                {formik.isValid ? "Add" : "please fill all fields"}
+              </button>
+              <Link
+                to={"/Login"}
+                className="text-primary_dark_blue block w-full text-start"
+              >
+                already login?
+              </Link>
+            </div>
+          </form>
+        </motion.div>
+      </AnimatePresence>
     </Layout>
   );
 };

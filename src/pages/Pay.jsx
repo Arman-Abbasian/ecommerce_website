@@ -5,7 +5,11 @@ import { useUser } from "../Providers/UserProvider";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import http from "../services/httpService";
+import { motion, animate, initial, AnimatePresence } from "framer-motion";
+
+
 var randomNumber = require("random-number");
+
 
 const Pay = () => {
   const user = useUser();
@@ -81,8 +85,37 @@ const Pay = () => {
         .catch((err) => toast.error(err.message));
     }
   };
+
+  //framer-motion
+  const listVariants = {
+    initial: {
+      opacity: 0,
+      x: "-100vw",
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.4,
+        duration: 1.6,
+        when: "beforeChildren",
+      },
+    },
+    hidden: {
+      x: "100vw",
+      opacity: 0,
+      transition: {
+        duration: 10,
+      },
+    },
+  };
   return (
-    <div className="flex flex-col gap-3 container mx-auto max-w-md p-2 relative">
+    <AnimatePresence>
+    <motion.div variants={listVariants}
+    initial="initial"
+    animate="visible"
+    exit="hidden" className="flex flex-col gap-3 container mx-auto max-w-md p-2 relative">
       <div class="aspect-w-8 aspect-h-5">
         <img
           src="/images/card.png"
@@ -190,7 +223,8 @@ const Pay = () => {
           pay
         </button>
       </form>
-    </div>
+    </motion.div>
+    </AnimatePresence>
   );
 };
 export default Pay;
