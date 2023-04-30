@@ -43,7 +43,7 @@
     "eject": "react-scripts eject",
     "predeploy" : "npm run build",
     "deploy" : "gh-pages -d build",
-    "server":"npx json-server --watch server/db.json --port=3000"
+    "server":"npx json-server --watch server/db.json --port=4000"
   },
   "eslintConfig": {
     "extends": [
