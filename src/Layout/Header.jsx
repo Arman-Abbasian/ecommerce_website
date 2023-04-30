@@ -93,7 +93,7 @@ const Header = () => {
                     pathname === "/" && "bg-primary_light_gray"
                   }`}
                 >
-                  <img src="/images/logo.webp" alt="logo" className="w-8 h-8" />
+                  <img src="ecommerce_website/images/logo.webp" alt="logo" className="w-8 h-8" />
                 </Link>
               </motion.li>
               <motion.li variants={item} className="w-1/3 md:w-full">
