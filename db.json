@@ -1,0 +1,294 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "cover 405",
+      "car": "peugeot 405",
+      "image": "images/products/cover 405.png",
+      "imgAlt": "cover 405",
+      "score": 4.7,
+      "price": 1200,
+      "reducedPrice": 1080,
+      "discount": 10,
+      "date": "Tue Feb 02 2023 15:40:21 GMT+0330 (Iran Standard Time)"
+    },
+    {
+      "id": 2,
+      "name": "cover 206",
+      "car": "peugeot 206",
+      "image": "images/products/cover 206.png",
+      "imgAlt": "cover 206",
+      "score": 4.7,
+      "price": 1400,
+      "reducedPrice": 1120,
+      "discount": 20,
+      "date": "Tue Feb 04 2023 8:13:21 GMT+0330 (Iran Standard Time)"
+    },
+    {
+      "id": 3,
+      "name": "cover pride",
+      "car": "pride",
+      "image": "images/products/cover pride.png",
+      "imgAlt": "cover pride",
+      "score": 4.8,
+      "price": 500,
+      "reducedPrice": 400,
+      "discount": 20,
+      "date": "Tue Feb 05 2023 10:20:21 GMT+0330 (Iran Standard Time)"
+    },
+    {
+      "id": 4,
+      "name": "cover tiba",
+      "car": "tiba",
+      "image": "images/products/cover tiba.png",
+      "imgAlt": "cover 405",
+      "score": 3.5,
+      "price": 800,
+      "reducedPrice": 640,
+      "discount": 20,
+      "date": "Tue Feb 05 2023 9:20:21 GMT+0330 (Iran Standard Time)"
+    },
+    {
+      "id": 5,
+      "name": "spring seat 206",
+      "car": "peugeot 206",
+      "image": "images/products/spring seat 206.png",
+      "imgAlt": "spring seat 206",
+      "score": 3.9,
+      "price": 300,
+      "reducedPrice": 270,
+      "discount": 10,
+      "date": "Tue Feb 06 2023 12:45:21 GMT+0330 (Iran Standard Time)"
+    },
+    {
+      "id": 6,
+      "name": "spring seat tiba",
+      "car": "tiba",
+      "image": "images/products/spring seat tiba.png",
+      "imgAlt": "spring seat tiba",
+      "score": 4.6,
+      "price": 200,
+      "reducedPrice": 180,
+      "discount": 10,
+      "date": "Tue Feb 07 2023 11:20:21 GMT+0330 (Iran Standard Time)"
+    }
+  ],
+  "user": [
+    {
+      "userName": "Arman",
+      "email": "abasian.arman@gmail.com",
+      "phoneNumber": "09331575385",
+      "password": "123456a@",
+      "id": 1
+    },
+    {
+      "userName": "Ali",
+      "email": "firouzian.Ali@gmail.com",
+      "phoneNumber": "09103243456",
+      "password": "123456a@",
+      "id": 2
+    },
+    {
+      "userName": "mahmood",
+      "email": "kafrash@gmail.com",
+      "phoneNumber": "09125673425",
+      "password": "123456a@",
+      "id": 3
+    },
+    {
+      "userName": "dededddeede",
+      "email": "abasian.arman@yahoo.com",
+      "phnoeNumber": "",
+      "password": "123456a@",
+      "id": 4
+    },
+    {
+      "userName": "mahmood",
+      "email": "mahmood.kafrashi@gmail.com",
+      "phnoeNumber": "",
+      "password": "mahmood12345@",
+      "id": 5
+    }
+  ],
+  "sales": [
+    {
+      "card": [
+        {
+          "id": 1,
+          "name": "cover 405",
+          "car": "peugeot 405",
+          "image": "images/products/cover 405.png",
+          "imgAlt": "cover 405",
+          "score": 4.7,
+          "price": 1200,
+          "reducedPrice": 1080,
+          "discount": 10,
+          "quantity": 1
+        },
+        {
+          "id": 2,
+          "name": "cover 206",
+          "car": "peugeot 206",
+          "image": "images/products/cover 206.png",
+          "imgAlt": "cover 206",
+          "score": 4.7,
+          "price": 1400,
+          "reducedPrice": 1120,
+          "discount": 20,
+          "quantity": 1
+        }
+      ],
+      "user": 1,
+      "date": "Tue Jan 31 2023 09:05:31 GMT+0330 (Iran Standard Time)",
+      "id": 1
+    },
+    {
+      "card": [
+        {
+          "id": 4,
+          "name": "cover tiba",
+          "car": "tiba",
+          "image": "images/products/cover tiba.png",
+          "imgAlt": "cover 405",
+          "score": 3.5,
+          "price": 800,
+          "reducedPrice": 640,
+          "discount": 20,
+          "quantity": 2
+        }
+      ],
+      "user": 2,
+      "date": "Tue Jan 31 2023 09:09:07 GMT+0330 (Iran Standard Time)",
+      "id": 2
+    },
+    {
+      "card": [
+        {
+          "id": 2,
+          "name": "cover 206",
+          "car": "peugeot 206",
+          "image": "images/products/cover 206.png",
+          "imgAlt": "cover 206",
+          "score": 4.7,
+          "price": 1400,
+          "reducedPrice": 1120,
+          "discount": 20,
+          "inventory": 1500,
+          "quantity": 2
+        },
+        {
+          "id": 1,
+          "name": "cover 405",
+          "car": "peugeot 405",
+          "image": "images/products/cover 405.png",
+          "imgAlt": "cover 405",
+          "score": 4.7,
+          "price": 1200,
+          "reducedPrice": 1080,
+          "discount": 10,
+          "quantity": 4
+        }
+      ],
+      "user": 1,
+      "date": "Tue Feb 07 2023 12:20:21 GMT+0330 (Iran Standard Time)",
+      "id": 3
+    },
+    {
+      "card": [
+        {
+          "id": 6,
+          "name": "spring seat tiba",
+          "car": "tiba",
+          "image": "images/products/spring seat tiba.png",
+          "imgAlt": "spring seat tiba",
+          "score": 4.6,
+          "price": 200,
+          "reducedPrice": 180,
+          "discount": 10,
+          "date": "Tue Feb 07 2023 11:20:21 GMT+0330 (Iran Standard Time)",
+          "quantity": 2
+        }
+      ],
+      "user": 3,
+      "date": "Tue Feb 14 2023 11:47:42 GMT+0330 (Iran Standard Time)",
+      "id": 4
+    },
+    {
+      "card": [
+        {
+          "id": 4,
+          "name": "cover tiba",
+          "car": "tiba",
+          "image": "images/products/cover tiba.png",
+          "imgAlt": "cover 405",
+          "score": 3.5,
+          "price": 800,
+          "reducedPrice": 640,
+          "discount": 20,
+          "date": "Tue Feb 05 2023 9:20:21 GMT+0330 (Iran Standard Time)",
+          "quantity": 32
+        },
+        {
+          "id": 6,
+          "name": "spring seat tiba",
+          "car": "tiba",
+          "image": "images/products/spring seat tiba.png",
+          "imgAlt": "spring seat tiba",
+          "score": 4.6,
+          "price": 200,
+          "reducedPrice": 180,
+          "discount": 10,
+          "date": "Tue Feb 07 2023 11:20:21 GMT+0330 (Iran Standard Time)",
+          "quantity": 10
+        }
+      ],
+      "user": 5,
+      "date": "Thu Mar 02 2023 11:49:04 GMT+0330 (Iran Standard Time)",
+      "id": 5
+    }
+  ],
+  "comments": [
+    {
+      "personId": 2,
+      "personUserName": "Ali",
+      "comment": "that is good",
+      "productId": "5",
+      "id": 1
+    },
+    {
+      "personId": 3,
+      "personUserName": "mahmood",
+      "comment": "I used it but that was not good really much",
+      "productId": "3",
+      "id": 2
+    },
+    {
+      "personId": 1,
+      "personUserName": "Arman",
+      "comment": "this is a very good product i usesd it and i am pleased",
+      "productId": "3",
+      "id": 3
+    },
+    {
+      "personId": 1,
+      "personUserName": "Arman",
+      "comment": "this is a good product, i bought it two month ago and i am satisfy.",
+      "productId": "5",
+      "id": 4
+    },
+    {
+      "personId": 5,
+      "personUserName": "mahmood",
+      "comment": ":(((((((من خریدم اصلا راضی نبودم",
+      "productId": "5",
+      "id": 5
+    },
+    {
+      "personId": 5,
+      "personUserName": "mahmood",
+      "comment": "واقعا که نمیدونم چی بگم واقعا",
+      "productId": "5",
+      "id": 6
+    }
+  ]
+}
