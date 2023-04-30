@@ -29,7 +29,7 @@ export default function Main() {
     },
     hidden: {
       x: "100vw",
-      opacity:0,
+      opacity: 0,
       transition: {
         duration: 10,
       },
@@ -61,7 +61,7 @@ export default function Main() {
               <div class="p-4">
                 <div className="aspect-w-7 aspect-h-4 md:aspect-w-7 md:aspect-h-3">
                   <img
-                    src="/images/products/cover 405.png"
+                    src="images/products/cover 405.png"
                     alt="cover 405"
                     class="w-full h-full object-center object-contain"
                   />
@@ -82,7 +82,7 @@ export default function Main() {
               <div class="p-4">
                 <div className="aspect-w-7 aspect-h-4 md:aspect-w-7 md:aspect-h-3">
                   <img
-                    src="/images/products/cover 206.png"
+                    src="images/products/cover 206.png"
                     alt="cover 206"
                     class="w-full h-full object-center object-contain"
                   />
@@ -103,7 +103,7 @@ export default function Main() {
               <div class="p-4">
                 <div className="aspect-w-7 aspect-h-4 md:aspect-w-7 md:aspect-h-3">
                   <img
-                    src="/images/products/cover pride.png"
+                    src="images/products/cover pride.png"
                     alt="cover pride"
                     class="w-full h-full object-center object-contain"
                   />
@@ -122,7 +122,7 @@ export default function Main() {
               <div class="p-4">
                 <div className="aspect-w-7 aspect-h-4 md:aspect-w-7 md:aspect-h-3">
                   <img
-                    src="/images/products/cover tiba.png"
+                    src="images/products/cover tiba.png"
                     alt="cover tiba"
                     class="w-full h-full object-center object-contain"
                   />
@@ -141,7 +141,7 @@ export default function Main() {
               <div class="p-4">
                 <div className="aspect-w-7 aspect-h-4 md:aspect-w-7 md:aspect-h-3">
                   <img
-                    src="/images/products/cover 405.png"
+                    src="images/products/cover 405.png"
                     alt="cover 405"
                     class="w-full h-full object-center object-contain"
                   />
@@ -162,7 +162,7 @@ export default function Main() {
               <div class="p-4">
                 <div className="aspect-w-7 aspect-h-4 md:aspect-w-7 md:aspect-h-3">
                   <img
-                    src="/images/products/spring seat 206.png"
+                    src="images/products/spring seat 206.png"
                     alt="spring seat 206"
                     class="w-full h-full object-center object-contain"
                   />
@@ -183,7 +183,7 @@ export default function Main() {
               <div class="p-4">
                 <div className="aspect-w-7 aspect-h-4 md:aspect-w-7 md:aspect-h-3">
                   <img
-                    src="/images/products/spring seat tiba.png"
+                    src="images/products/spring seat tiba.png"
                     alt="spring seat tiba"
                     class="w-full h-full object-center object-contain"
                   />
