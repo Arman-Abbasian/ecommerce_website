@@ -75,7 +75,7 @@ const Pay = () => {
       toast.error("security code is wrong");
     } else {
       http
-        .post("/sales", { card, user: user.id, date: Date() })
+        .post("https://my-json-server.typicode.com/Arman-Abbasian/ecommerce_website_DB/sales", { card, user: user.id, date: Date() })
         .then((res) => {
           toast.success("pay successfully");
           localStorage.removeItem("card");
@@ -118,7 +118,7 @@ const Pay = () => {
     exit="hidden" className="flex flex-col gap-3 container mx-auto max-w-md p-2 relative">
       <div class="aspect-w-8 aspect-h-5">
         <img
-          src="/images/card.png"
+          src="images/card.png"
           alt="credit card"
           className="w-full h-full object-center object-contain"
         />

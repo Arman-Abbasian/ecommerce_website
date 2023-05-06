@@ -40,7 +40,7 @@ const ProductDetail = () => {
   useEffect(() => {
     setSelectedItem({ data: null, error: null, loading: true });
     http
-      .get(`/products/${selectedItemId}`)
+      .get(`https://my-json-server.typicode.com/Arman-Abbasian/ecommerce_website_DB/products/${selectedItemId}`)
       .then((res) =>
         setSelectedItem({ data: res.data, error: null, loading: false })
       )
@@ -52,7 +52,7 @@ const ProductDetail = () => {
   useEffect(() => {
     initialLoading();
     http
-      .get(`/comments?productId=${selectedItemId}`)
+      .get(`https://my-json-server.typicode.com/Arman-Abbasian/ecommerce_website_DB/comments?productId=${selectedItemId}`)
       .then((res) => {
         setComments(res.data);
       })
@@ -93,7 +93,7 @@ const ProductDetail = () => {
       toast.error("please login at first");
     } else {
       http
-        .post("/comments", {
+        .post("https://my-json-server.typicode.com/Arman-Abbasian/ecommerce_website_DB/comments", {
           personId: user.id,
           personUserName: user.userName,
           comment: textAreaInput,

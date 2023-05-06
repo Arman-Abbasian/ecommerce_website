@@ -40,7 +40,9 @@ const Login = () => {
   useEffect(() => {
     setUsers({ data: null, error: null, loading: true });
     http
-      .get("/user")
+      .get(
+        "https://my-json-server.typicode.com/Arman-Abbasian/ecommerce_website_DB/user"
+      )
       .then((res) => setUsers({ data: res.data, error: null, loading: false }))
       .catch((err) => {
         toast.error(err.message);

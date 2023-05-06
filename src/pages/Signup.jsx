@@ -47,7 +47,9 @@ const Signup = () => {
   const navigate = useNavigate();
   useEffect(() => {
     http
-      .get("./user")
+      .get(
+        "https://my-json-server.typicode.com/Arman-Abbasian/ecommerce_website_DB/user"
+      )
       .then((res) => setUsers(res.data))
       .catch((err) => toast.error(err.message));
   }, []);
@@ -70,7 +72,10 @@ const Signup = () => {
       const { userName, email, phnoeNumber, password } = values;
       const newValues = { userName, email, phnoeNumber, password };
       http
-        .post(`/user`, newValues)
+        .post(
+          `https://my-json-server.typicode.com/Arman-Abbasian/ecommerce_website_DB/user`,
+          newValues
+        )
         .then((res) => {
           toast.success(`user made successfully`);
           navigate("/Login");
@@ -114,7 +119,7 @@ const Signup = () => {
     <Layout>
       <AnimatePresence>
         <motion.div
-        variants={listVariants}
+          variants={listVariants}
           initial="initial"
           animate="visible"
           exit="hidden"
