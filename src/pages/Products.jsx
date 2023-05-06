@@ -111,7 +111,9 @@ const Products = () => {
       loading: true,
     });
     http
-      .get("/products")
+      .get(
+        "/products"
+      )
       .then((res) =>
         setProducts({
           data: res.data,

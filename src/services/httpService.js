@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL="http://localhost:4000"
+axios.defaults.baseURL="https://my-json-server.typicode.com/Arman-Abbasian/ecommerce_website_DB"
 const http={
     get:axios.get,
     post:axios.post,
