@@ -112,7 +112,7 @@ const Products = () => {
     });
     http
       .get(
-        "/products"
+        "https://my-json-server.typicode.com/Arman-Abbasian/ecommerce_website_DB/products"
       )
       .then((res) =>
         setProducts({
