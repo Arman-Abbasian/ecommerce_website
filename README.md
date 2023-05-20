@@ -12,6 +12,9 @@
 <p width="960" style="padding-right:40px;" align="left" >useContext</p>
 <p width="960" style="padding-right:40px;" align="left" >react-select</p>
 
+# summary of project
+In this project i worked on a ecommerce app for persons that want to buy products related to car.
+
 # overview of project
 
 <a href="https://www.youtube.com/watch?v=x9xTauR17ms
